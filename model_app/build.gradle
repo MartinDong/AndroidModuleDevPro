@@ -4,12 +4,17 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
-// Create a variable called keystorePropertiesFile, and initialize it to your
-// keystore.properties file, in the rootProject folder.
+//获取项目的扩展属性
+def ext = rootProject.ext
+//ext为上方属性
+def versions = ext.versions
+def dependcy = ext.dependencies
+
+// 创建一个名为keystorePropertiesFile的变量，并将其初始化为密钥存储库。属性文件，在rootProject文件夹中。
 def keystorePropertiesFile = rootProject.file("keystore.properties")
-// Initialize a new Properties() object called keystoreProperties.
+// 初始化一个名为keystoreProperties的新属性对象。
 def keystoreProperties = new Properties()
-// Load your keystore.properties file into the keystoreProperties object.
+// 加载密钥存储库。属性文件到keystoreProperties对象。
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 //记录构建时间
@@ -18,16 +23,17 @@ static def buildTime() {
 }
 
 android {
+    compileSdkVersion versions.compileSdkVersion
 
-    compileSdkVersion 26
     defaultConfig {
         applicationId "com.dong.androidmoduledev"
-        minSdkVersion 15
-        targetSdkVersion 26
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -54,10 +60,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation dependcy.kotlin_stdlib_jdk7
+    implementation dependcy.appcompat_v7
+    implementation dependcy.constraint_layout
 }

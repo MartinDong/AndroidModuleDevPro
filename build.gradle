@@ -1,24 +1,31 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
-    ext.kotlin_version = '1.2.21'
+    //将dependencies.gradle应用到所有项目中
+    apply from: "dependencies.gradle"
+
+    //获取项目的扩展属性
+    def ext = rootProject.ext
+    //ext为上方属性
+    def versions = ext.versions
+    def dependcy = ext.dependencies
+
     repositories {
-        google()
-        jcenter()
+        maven { url "http://maven.7u1.cn/repository/maven-public/" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath "com.android.tools.build:gradle:3.0.1"
+        classpath dependcy.kotlin_gradle_plugin
     }
 }
 
 allprojects {
     repositories {
-        google()
-        jcenter()
+        maven { url "http://maven.7u1.cn/repository/maven-public/" }
+    }
+
+    // 组件缓存更新时间设置（默认每次build都更新）
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'minutes'
     }
 }
 

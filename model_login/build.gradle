@@ -1,15 +1,20 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+
+//获取项目的扩展属性
+def ext = rootProject.ext
+//ext为上方属性
+def versions = ext.versions
+def dependcy = ext.dependencies
+
 android {
-    compileSdkVersion 26
-
-
+    compileSdkVersion versions.compileSdkVersion
 
     defaultConfig {
         applicationId "com.dong.model_login"
-        minSdkVersion 15
-        targetSdkVersion 26
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -28,10 +33,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation dependcy.kotlin_stdlib_jdk7
+    implementation dependcy.appcompat_v7
+    implementation dependcy.constraint_layout
 }
