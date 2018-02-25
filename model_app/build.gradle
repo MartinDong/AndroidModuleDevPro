@@ -121,4 +121,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation dependcy.multidex
     implementation project(':lib_common')
+
+    if (!isModule.toBoolean()) {
+        implementation project(':model_login')
+        implementation project(':model_news')
+    }
 }
