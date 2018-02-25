@@ -26,7 +26,7 @@ android {
     compileSdkVersion versions.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.dong.androidmoduledev"
+        applicationId "com.dong.model_app"
         minSdkVersion versions.minSdkVersion
         targetSdkVersion versions.targetSdkVersion
         versionCode 1

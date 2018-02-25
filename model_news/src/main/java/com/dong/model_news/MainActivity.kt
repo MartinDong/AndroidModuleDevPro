@@ -1,4 +1,4 @@
-package com.example.model_news
+package com.dong.model_news
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

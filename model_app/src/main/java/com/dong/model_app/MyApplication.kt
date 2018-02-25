@@ -1,4 +1,4 @@
-package com.dong.androidmoduledev
+package com.dong.model_app
 
 import android.support.multidex.MultiDexApplication
 

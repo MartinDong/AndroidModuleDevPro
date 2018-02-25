@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dong.androidmoduledev">
+    package="com.dong.model_app">
 
     <application
-        android:name=".MyApplication"
+        android:name="com.dong.model_app.MyApplication"
         android:allowBackup="true"
         android:icon="${app_icon}"
         android:label="${app_label}"
