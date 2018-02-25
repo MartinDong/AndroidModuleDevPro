@@ -119,8 +119,6 @@ android {
 //依赖设置
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation dependcy.kotlin_stdlib_jdk7
     implementation dependcy.multidex
-    implementation dependcy.appcompat_v7
-    implementation dependcy.constraint_layout
+    implementation project(':lib_common')
 }
