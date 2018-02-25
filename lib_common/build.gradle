@@ -41,5 +41,7 @@ dependencies {
     api dependcy.kotlin_stdlib_jdk7
     api dependcy.appcompat_v7
     api dependcy.constraint_layout
+
+    api dependcy.arouter_api
 }
 

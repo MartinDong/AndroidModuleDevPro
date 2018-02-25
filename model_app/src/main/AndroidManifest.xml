@@ -3,7 +3,7 @@
     package="com.dong.model_app">
 
     <application
-        android:name="com.dong.model_app.MyApplication"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="${app_icon}"
         android:label="${app_label}"

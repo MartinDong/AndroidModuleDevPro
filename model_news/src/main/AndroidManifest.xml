@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.model_news">
+    package="com.dong.model_news">
 
     <application android:theme="@style/AppTheme">
         <activity
