@@ -12,6 +12,13 @@ def ext = rootProject.ext
 def versions = ext.versions
 def dependcy = ext.dependencies
 
+// 创建一个名为keystorePropertiesFile的变量，并将其初始化为密钥存储库。属性文件，在rootProject文件夹中。
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+// 初始化一个名为keystoreProperties的新属性对象。
+def keystoreProperties = new Properties()
+// 加载密钥存储库。属性文件到keystoreProperties对象。
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     compileSdkVersion versions.compileSdkVersion
 
@@ -37,14 +44,56 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    //签名信息配置
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+        debug {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
+    //构建类型设置
     buildTypes {
         release {
+            // 更改AndroidManifest.xml中预先定义好占位符信息
+            manifestPlaceholders = [
+                    app_icon : "@mipmap/ic_launcher",
+                    app_label: "@string/app_name"
+            ]
+            // 自定义BuildConfig字段
+            // 不显示Log
+            buildConfigField "boolean", "LEO_DEBUG", "false"
+            // 是否zip对齐
+            zipAlignEnabled true
+            // 缩减resource文件
+            shrinkResources true
+            // Proguard 混淆设置
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // 签名
+            signingConfig signingConfigs.release
+        }
+
+        debug {
+            // 给applicationId添加后缀“.debug”，这样手机就可以支持安装多个当前app
+            applicationIdSuffix ".debug"
+            manifestPlaceholders = [
+                    app_icon : "@mipmap/ic_launcher_round",
+                    app_label: "@string/app_name_debug"
+            ]
             buildConfigField "boolean", "LOG_DEBUG", "true"
             zipAlignEnabled false
             shrinkResources false
             minifyEnabled false
             debuggable true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
