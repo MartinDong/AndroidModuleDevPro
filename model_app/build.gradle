@@ -96,6 +96,25 @@ android {
 //            storePassword keystoreProperties['storePassword']
 //        }
 //    }
+
+    //dex多分包配置
+    dexOptions {
+        //增加java堆内存大小
+        javaMaxHeapSize "4g"
+        //关闭对Lib做 preDexing
+        preDexLibraries = false
+        //dex参数详见 dx --help
+        additionalParameters = [
+                //多分包
+                '--multi-dex',
+                //每个包内方法数上限
+                '--set-max-idx-number=60000',
+                //打包进主classes.dex的文件列表
+                '--main-dex-list=' + projectDir + '/maindexlist.txt',
+                //使上一句生效
+                '--minimal-main-dex'
+        ]
+    }
 }
 
 //依赖设置

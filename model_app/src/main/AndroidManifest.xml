@@ -3,6 +3,7 @@
     package="com.dong.androidmoduledev">
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="${app_icon}"
         android:label="${app_label}"

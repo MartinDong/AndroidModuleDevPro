@@ -1,0 +1,2 @@
+com/dong/androidmoduledev/MainActivity.class
+com/dong/androidmoduledev/MyApplication.class
