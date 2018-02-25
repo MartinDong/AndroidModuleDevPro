@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/model_app/model_app.iml" filepath="$PROJECT_DIR$/model_app/model_app.iml" />
       <module fileurl="file://$PROJECT_DIR$/model_login/model_login.iml" filepath="$PROJECT_DIR$/model_login/model_login.iml" />
       <module fileurl="file://$PROJECT_DIR$/model_news/model_news.iml" filepath="$PROJECT_DIR$/model_news/model_news.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module_main/module_main.iml" filepath="$PROJECT_DIR$/module_main/module_main.iml" />
     </modules>
   </component>
 </project>
