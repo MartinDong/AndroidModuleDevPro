@@ -3,12 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidModuleDev.iml" filepath="$PROJECT_DIR$/AndroidModuleDev.iml" />
-      <module fileurl="file://D:\Project\Android\AndroidModuleDev\model_app\app.iml" filepath="D:\Project\Android\AndroidModuleDev\model_app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_common/lib_common.iml" filepath="$PROJECT_DIR$/lib_common/lib_common.iml" />
-      <module fileurl="file://$PROJECT_DIR$/model_app/model_app.iml" filepath="$PROJECT_DIR$/model_app/model_app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/model_login/model_login.iml" filepath="$PROJECT_DIR$/model_login/model_login.iml" />
-      <module fileurl="file://$PROJECT_DIR$/model_news/model_news.iml" filepath="$PROJECT_DIR$/model_news/model_news.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module_app/module_app.iml" filepath="$PROJECT_DIR$/module_app/module_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module_login/module_login.iml" filepath="$PROJECT_DIR$/module_login/module_login.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_main/module_main.iml" filepath="$PROJECT_DIR$/module_main/module_main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module_news/module_news.iml" filepath="$PROJECT_DIR$/module_news/module_news.iml" />
     </modules>
   </component>
 </project>

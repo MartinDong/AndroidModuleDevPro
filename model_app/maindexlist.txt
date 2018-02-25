@@ -1,1 +1,0 @@
-com/dong/model_app/MyApplication.class
