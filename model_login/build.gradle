@@ -1,4 +1,8 @@
-apply plugin: 'com.android.application'
+if (isModule.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
@@ -12,23 +16,52 @@ android {
     compileSdkVersion versions.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.dong.model_login"
         minSdkVersion versions.minSdkVersion
         targetSdkVersion versions.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        // java编译对annotation的配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                // 是否包含编译Class的路径（供系统使用）
+                includeCompileClasspath = true
+                // ARouter配置
+                arguments = [moduleName: project.getName()]
+            }
+        }
+    }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     buildTypes {
         release {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            zipAlignEnabled false
+            shrinkResources false
             minifyEnabled false
+            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
+    //重新设置资源指向
+    sourceSets {
+        main {
+            if (isModule.toBoolean()) {
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/mian/AndroidManifest.xml'
+                //集成开发模式下排除 debug 文件夹中的所有Java文件
+                java {
+                    exclude 'debug/**'
+                }
+            }
+        }
+    }
 }
 
 dependencies {
