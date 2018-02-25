@@ -6,6 +6,7 @@ ext {
             support          : "27.0.2",
             constraint_layout: "1.0.2",
             kotlin_version   : '1.2.21',
+            multidex         : '1.0.2',
     ]
     dependencies = [
             //Android support
@@ -14,5 +15,7 @@ ext {
             constraint_layout   : "com.android.support.constraint:constraint-layout:$versions.constraint_layout",
             kotlin_stdlib_jdk7  : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin_version",
             kotlin_gradle_plugin: "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin_version",
+            //dex
+            multidex            : "com.android.support:multidex:$versions.multidex",
     ]
 }
