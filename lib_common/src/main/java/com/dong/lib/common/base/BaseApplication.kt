@@ -1,6 +1,7 @@
 package com.dong.lib.common.base
 
 import android.app.Application
+import com.dong.lib.common.utils.Utils
 
 /**
  * 要想使用BaseApplication，必须在组件中实现自己的Application，并且继承BaseApplication；
@@ -13,5 +14,25 @@ import android.app.Application
 
 open class BaseApplication : Application() {
 
+    companion object {
+        private var sInstance: BaseApplication? = null
 
+        //标记app的根包名
+        val ROOT_PACKAGE = "com.dong.common"
+
+        /**
+         * 返回应用的上下文
+         */
+        fun getIns(): BaseApplication? {
+            return sInstance
+        }
+    }
+
+    // region Application初始化的同时，去初始化一些必要的信息，如果耗时的需要丢到子线程或者别的生命周期中
+    override fun onCreate() {
+        super.onCreate()
+        sInstance = this
+        Utils.init(this)
+    }
+    // endregion
 }

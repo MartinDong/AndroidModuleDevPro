@@ -114,6 +114,22 @@ android {
                 '--minimal-main-dex'
         ]
     }
+
+    //程序在buid的时候，会执行lint检查，有任何的错误或者警告提示，都会终止构建，我们可以将其关掉
+    lintOptions {
+        abortOnError false
+        htmlReport true
+    }
+
+    //去除打包的一些三方证书
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        //解決rxjava冲突
+        exclude 'META-INF/rxjava.properties'
+    }
 }
 
 //依赖设置

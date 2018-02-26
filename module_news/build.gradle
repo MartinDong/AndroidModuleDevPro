@@ -5,12 +5,20 @@ if (isModule.toBoolean()) {
 }
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 //获取项目的扩展属性
 def ext = rootProject.ext
 //ext为上方属性
 def versions = ext.versions
 def dependcy = ext.dependencies
+
+kapt {
+    arguments {
+        // ARouter配置
+        arg("moduleName", project.getName())
+    }
+}
 
 android {
     compileSdkVersion versions.compileSdkVersion
@@ -26,8 +34,6 @@ android {
             annotationProcessorOptions {
                 // 是否包含编译Class的路径（供系统使用）
                 includeCompileClasspath = true
-                // ARouter配置
-                arguments = [moduleName: project.getName()]
             }
         }
     }
@@ -69,5 +75,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':lib_common')
 
-    annotationProcessor dependcy.arouter_compiler
+    kapt dependcy.arouter_compiler
 }

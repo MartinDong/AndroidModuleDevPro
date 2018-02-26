@@ -8,7 +8,7 @@ import com.dong.lib.common.base.StringUtils;
 
 /**
  * <p>Utils初始化相关 </p>
- * Created by xiaoyulaoshi on 2018/2/26.
+ * Created by Kotlin on 2018/2/26.
  */
 
 public class Utils {
