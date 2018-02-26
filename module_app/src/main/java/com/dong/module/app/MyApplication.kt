@@ -1,8 +1,8 @@
-package com.dong.module_app
+package com.dong.module.app
 
 import android.content.Context
 import android.support.multidex.MultiDex
-import com.dong.lib_common.base.BaseApplication
+import com.dong.lib.common.base.BaseApplication
 
 /**
  * <p>这里仅需做一些初始化的工作</p>

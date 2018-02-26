@@ -1,4 +1,4 @@
-package com.dong.lib_common.base
+package com.dong.lib.common.base
 
 import android.app.Application
 

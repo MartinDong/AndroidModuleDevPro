@@ -1,6 +1,6 @@
 package debug
 
-import com.dong.lib_common.base.BaseApplication
+import com.dong.lib.common.base.BaseApplication
 
 /**
  * <p>调试当前模块儿使用</p>

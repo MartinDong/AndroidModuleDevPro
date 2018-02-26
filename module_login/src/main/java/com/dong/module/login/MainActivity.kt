@@ -1,4 +1,4 @@
-package com.dong.module_login
+package com.dong.module.login
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

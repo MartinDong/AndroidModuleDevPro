@@ -1,4 +1,4 @@
-package com.dong.module_main
+package com.dong.module.main
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
