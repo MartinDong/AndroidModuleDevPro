@@ -2,4 +2,6 @@
     <string name="app_name">APP主入口</string>
 
     <string name="main_module">APP主入口</string>
+
+    <string name="app_exit_hint">再按一次退出程序</string>
 </resources>
