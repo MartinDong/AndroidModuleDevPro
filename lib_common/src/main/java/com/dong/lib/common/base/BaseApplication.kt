@@ -10,6 +10,7 @@ import android.app.Application
  *
  * Created by Kotlin on 2018/2/25.
  */
+
 open class BaseApplication : Application() {
 
 
