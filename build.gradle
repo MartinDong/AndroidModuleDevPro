@@ -9,6 +9,7 @@ buildscript {
     def versions = ext.versions
     def dependcy = ext.dependencies
 
+
     repositories {
         maven { url "http://maven.7u1.cn/repository/maven-public/" }
     }
