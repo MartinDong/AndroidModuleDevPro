@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.KeyEvent
 import com.alibaba.android.arouter.launcher.ARouter
 import com.dong.lib.common.base.BaseActivity
+import com.dong.lib.common.base.ViewManager
 import com.dong.lib.common.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -32,7 +33,7 @@ class MainActivity : BaseActivity() {
                 ToastUtils.showShortToast(getString(R.string.app_exit_hint))
                 mExitTime = System.currentTimeMillis()
             } else {
-//                ViewManager.getInstance().exitApp(this)
+                ViewManager.getInstance().exitApp(this)
             }
             return true
         }

@@ -1,5 +1,6 @@
 package com.dong.lib.common.base
 
+import android.os.Bundle
 import android.support.annotation.Keep
 import android.support.v7.app.AppCompatActivity
 
@@ -10,8 +11,16 @@ import android.support.v7.app.AppCompatActivity
 @Keep
 open class BaseActivity : AppCompatActivity() {
 
-   init {
-       BaseApplication.getIns()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //将当前Activity进行自己管理
+        ViewManager.getInstance().addActivity(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //将当前的Activity移除堆栈
+        ViewManager.getInstance().finishActivity(this)
     }
 
 }
