@@ -28,8 +28,9 @@ class BaseDaoFactory {
     }
 
     constructor() {
-        sqLiteDatabasePath = "data/data/com.dong.module.app/donghongyu.db"
-        sqLiteDatabase = SQLiteDatabase.openDatabase(sqLiteDatabasePath, null, SQLiteDatabase.CREATE_IF_NECESSARY)
+        sqLiteDatabasePath = "data/data/com.dong.module.app.debug/donghongyu.db"
+        //openOrCreateDatabase 如果不存在则先创建再打开数据库，如果存在则直接打开。
+        sqLiteDatabase = SQLiteDatabase.openOrCreateDatabase(sqLiteDatabasePath, null)
     }
 
     //获取数据库操作对象

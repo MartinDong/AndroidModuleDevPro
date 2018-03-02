@@ -20,6 +20,7 @@ class BaseDao<T> : IBaseDao<T> {
 
     fun init(sqLiteDatabase: SQLiteDatabase, entityClass: Class<T>): Boolean {
         this.sqLiteDatabase = sqLiteDatabase
+        this.entityClass = entityClass
         this.tableName = tableName
         //自动建表（只创建一次）
         if (!isInit) {
@@ -85,9 +86,9 @@ class BaseDao<T> : IBaseDao<T> {
                 }
             }
 
-            if (index == fields.size) {
+            if (index == fields.size - 1) {
                 if (sqlCreateTable.endsWith(","))
-                    sqlCreateTable.deleteCharAt(index - 1)
+                    sqlCreateTable.deleteCharAt(sqlCreateTable.length - 1)
             }
         }
         sqlCreateTable.append(")")
