@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_sqlite.*
  *  Created by Kotlin on 2018/2/26.
  */
 @Route(path = "/sqlite/center")
-class SQLIteActivity : BaseActivity() {
+class SQLiteActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
