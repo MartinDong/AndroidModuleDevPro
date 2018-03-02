@@ -4,4 +4,9 @@
     <string name="module_sqlite_init_db">初始化数据库</string>
     <string name="module_sqlite_init_db_for_old">通过传统方式初始化myApp.db数据库</string>
     <string name="module_sqlite_init_user_table">初始化User数据表</string>
+    <string name="module_sqlite_init_db_table">初始化数据表</string>
+
+    <string name="module_sqlite_toast_init_db_table">数据库未连接，需先建立数据库连接才可以创建数据表</string>
+    <string name="module_sqlite_toast_init_db_success">数据库连接成功</string>
+    <string name="module_sqlite_toast_init_db_tab_success">创建数据表成功</string>
 </resources>
