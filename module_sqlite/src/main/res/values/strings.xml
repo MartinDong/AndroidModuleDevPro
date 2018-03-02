@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">SQLite组件</string>
 
-    <string name="news_module">SQLite组件</string>
+    <string name="module_sqlite_init_db">初始化数据库</string>
+    <string name="module_sqlite_init_db_for_old">通过传统方式初始化myApp.db数据库</string>
+    <string name="module_sqlite_init_user_table">初始化User数据表</string>
 </resources>

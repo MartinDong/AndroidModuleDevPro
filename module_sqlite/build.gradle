@@ -75,5 +75,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':lib_common')
 
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     kapt dependcy.arouter_compiler
 }

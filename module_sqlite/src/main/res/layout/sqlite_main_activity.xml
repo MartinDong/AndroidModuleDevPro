@@ -4,13 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.dong.module.sqlite.SQLiteActivity">
+    tools:context="com.dong.module.sqlite.SQLiteMainActivity">
 
+
+    <Button
+        android:id="@+id/btn_init_user_for_old"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/module_sqlite_init_db_for_old" />
 
     <Button
         android:id="@+id/btn_init_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="初始化User数据表" />
+        android:text="@string/module_sqlite_init_user_table" />
 
 </LinearLayout>
