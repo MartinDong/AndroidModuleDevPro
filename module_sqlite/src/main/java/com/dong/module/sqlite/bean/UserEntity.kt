@@ -1,4 +1,4 @@
-package com.dong.module.bean
+package com.dong.module.sqlite.bean
 
 import com.dong.lib.common.sqlite.annotation.DbField
 import com.dong.lib.common.sqlite.annotation.DbTable

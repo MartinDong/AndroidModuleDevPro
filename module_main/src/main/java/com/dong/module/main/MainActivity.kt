@@ -24,6 +24,11 @@ class MainActivity : BaseActivity() {
             //跳转到新闻主页
             ARouter.getInstance().build("/news/center").navigation()
         }
+
+        btn_sqlite.setOnClickListener {
+            //跳转到新闻主页
+            ARouter.getInstance().build("/sqlite/center").navigation()
+        }
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {

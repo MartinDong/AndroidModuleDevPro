@@ -1,1 +1,1 @@
-include ':module_app', ':module_login', ':lib_common', ':module_news', ':module_main'
+include ':module_app', ':module_login', ':lib_common', ':module_news', ':module_main', ':module_sqlite'

@@ -142,5 +142,6 @@ dependencies {
         implementation project(':module_main')
         implementation project(':module_login')
         implementation project(':module_news')
+        implementation project(':module_sqlite')
     }
 }
