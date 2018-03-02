@@ -20,6 +20,9 @@
         <activity
             android:name=".initdb.OldWayInitActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".initdb.MyWayInitActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

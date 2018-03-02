@@ -43,8 +43,12 @@ class BaseDaoFactory {
     fun <T> getBaseDao(entityClass: Class<T>): BaseDao<T>? {
         var baseDao: BaseDao<T>? = null
 
-        baseDao = BaseDao::class.java.newInstance() as BaseDao<T>?
-        baseDao!!.init(sqLiteDatabase!!, entityClass)
+        try {
+            baseDao = BaseDao::class.java.newInstance() as BaseDao<T>?
+            baseDao!!.init(sqLiteDatabase!!, entityClass)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
         return baseDao
     }

@@ -8,15 +8,15 @@
 
 
     <Button
-        android:id="@+id/btn_init_user_for_old"
+        android:id="@+id/btn_init_db_for_old"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/module_sqlite_init_db_for_old" />
 
     <Button
-        android:id="@+id/btn_init_user"
+        android:id="@+id/btn_init_db_for_my"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/module_sqlite_init_user_table" />
+        android:text="@string/module_sqlite_init_db_for_my" />
 
 </LinearLayout>

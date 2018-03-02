@@ -4,8 +4,6 @@ import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.dong.lib.common.base.BaseActivity
-import com.dong.lib.common.sqlite.BaseDaoFactory
-import com.dong.module.sqlite.bean.UserEntity
 import kotlinx.android.synthetic.main.sqlite_main_activity.*
 
 /**
@@ -19,12 +17,12 @@ class SQLiteMainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.sqlite_main_activity)
 
-        btn_init_user_for_old.setOnClickListener {
+        btn_init_db_for_old.setOnClickListener {
             ARouter.getInstance().build("/sqlite/initdb/old_way_init").navigation()
         }
 
-        btn_init_user.setOnClickListener {
-            BaseDaoFactory.getInstance().getBaseDao(UserEntity::class.java)
+        btn_init_db_for_my.setOnClickListener {
+            ARouter.getInstance().build("/sqlite/initdb/my_way_init").navigation()
         }
     }
 
