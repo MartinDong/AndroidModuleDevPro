@@ -1,0 +1,12 @@
+stages:
+- build
+
+build:
+  stage: build
+  only:
+  - master
+  script:
+  #执行 签名编译
+  - gradle app:assembleRelease
+  #打印日志进行标记
+  - echo "APP编译成功……"
