@@ -12,4 +12,5 @@
     <string name="module_sqlite_insert_test_data">插入测试数据</string>
     <string name="module_sqlite_query_data">查询数据库数据</string>
     <string name="module_sqlite_delete_data">删除数据</string>
+    <string name="module_sqlite_update_data">更新数据</string>
 </resources>

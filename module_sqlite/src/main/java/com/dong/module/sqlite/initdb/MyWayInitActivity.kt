@@ -38,7 +38,7 @@ class MyWayInitActivity : BaseActivity() {
             if (userBaseDao != null) {
                 val userEntity = UserEntity()
                 userEntity.id = 1
-                userEntity.name = "测试插入数据"
+                userEntity.name = "董宏宇"
                 userEntity.password = "lalala"
                 val result = userBaseDao!!.insert(userEntity)
                 if (result > 0) {
@@ -54,7 +54,7 @@ class MyWayInitActivity : BaseActivity() {
         btn_query_all_data.setOnClickListener {
             if (userBaseDao != null) {
                 val where = UserEntity()
-                //where.id = 1
+                where.id = 1
 
                 val result = userBaseDao!!.query(where)
                 if (result.size > 0) {
@@ -70,13 +70,34 @@ class MyWayInitActivity : BaseActivity() {
         btn_delete_data.setOnClickListener {
             if (userBaseDao != null) {
                 val where = UserEntity()
-                where.name = "董宏宇"
+//                where.name = "董宏宇"
 
                 val result = userBaseDao!!.delete(where)
                 if (result > 0) {
                     tv_show_result.text = "删除了 $result 条数据"
                 } else {
                     tv_show_result.text = "没有找到要删除的数据"
+                }
+            } else {
+                ToastUtils.showShortToast("请先连接数据库")
+            }
+        }
+
+        btn_update_data.setOnClickListener {
+            if (userBaseDao != null) {
+                val where = UserEntity()
+                where.name = "董宏宇"
+
+                val userEntity = UserEntity()
+                userEntity.id = 1
+                userEntity.name = "name=董宏宇，改为了=>donghongyu"
+                userEntity.password = "lalala"
+
+                val result = userBaseDao!!.update(where,userEntity)
+                if (result > 0) {
+                    tv_show_result.text = "更新了 $result 条数据"
+                } else {
+                    tv_show_result.text = "没有找到要更新的数据"
                 }
             } else {
                 ToastUtils.showShortToast("请先连接数据库")

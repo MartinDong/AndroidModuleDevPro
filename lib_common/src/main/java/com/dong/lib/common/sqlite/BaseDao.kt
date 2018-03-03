@@ -158,6 +158,22 @@ class BaseDao<T : Any> : IBaseDao<T> {
     }
 
     /**
+     * 更新数据
+     */
+    override fun update(where: T, newEntity: T): Int {
+        val condition = Condition(getContentValuesForQuery(where))
+
+        //受影响行数
+        return sqLiteDatabase!!
+                .update(
+                        tableName,
+                        getContentValuesForInsert(newEntity),
+                        condition.getWhereCause(),
+                        condition.getWhereArgs()
+                )
+    }
+
+    /**
      * 查询数据
      * @param where 查询条件对象,同时也用来初始化对象使用
      */
@@ -230,11 +246,11 @@ class BaseDao<T : Any> : IBaseDao<T> {
     }
 
     /**
-     * 查询条件
+     * 条件拼接
      */
     class Condition(whereContent: ContentValues) {
         /**
-         * 查询条件
+         * 条件拼接
          * _id=?&&name=?
          */
         private var whereCause: String? = null

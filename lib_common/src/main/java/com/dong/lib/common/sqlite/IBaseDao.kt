@@ -6,14 +6,19 @@ package com.dong.lib.common.sqlite
  */
 interface IBaseDao<T> {
     /**
-     * 插入操作
+     * 将 [entity] 进行数据插入
      */
     fun insert(entity: T): Long
 
     /**
-     * 根据条件 [where] 删除操作
+     * 根据条件 [where] 进行数据删除
      */
     fun delete(where: T): Int
+
+    /**
+     * 根据条件 [where] 进行数据更新，如果[where]==null 则代表删除所有数据
+     */
+    fun update(where: T, newEntity: T): Int
 
     /**
      * 根据条件 [where] 进行数据查询，如果[where]==null 则代表查询所有数据
