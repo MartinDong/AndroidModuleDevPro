@@ -153,9 +153,8 @@ class BaseDao<T> : IBaseDao<T> {
         map.entries.iterator().forEach {
             val key = it.key
             val value = it.value
-            if (value != null) {
-                contentValues.put(key, value)
-            }
+            //设置数据表每一列对应的数据
+            contentValues.put(key, value)
         }
         return contentValues
     }
