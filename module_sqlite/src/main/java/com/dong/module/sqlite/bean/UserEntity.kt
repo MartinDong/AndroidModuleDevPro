@@ -10,7 +10,7 @@ import com.dong.lib.common.sqlite.annotation.DbTable
 @DbTable("tb_user")
 class UserEntity {
     @DbField("_id")
-    var id: Int = 0
+    var id: Int? = null
     @DbField("_name")
     var name: String? = null
     @DbField("_password")

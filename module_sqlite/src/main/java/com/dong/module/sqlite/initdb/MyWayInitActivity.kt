@@ -53,7 +53,10 @@ class MyWayInitActivity : BaseActivity() {
 
         btn_query_all_data.setOnClickListener {
             if (userBaseDao != null) {
-                val result = userBaseDao!!.queryAll(UserEntity())
+                val where = UserEntity()
+                //where.id = 1
+
+                val result = userBaseDao!!.query(where)
                 if (result.size > 0) {
                     tv_show_result.text = result.toString()
                 } else {
