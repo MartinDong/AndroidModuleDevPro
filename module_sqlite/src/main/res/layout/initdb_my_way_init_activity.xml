@@ -19,18 +19,19 @@
         android:text="@string/module_sqlite_insert_test_data"
         app:layout_constraintLeft_toRightOf="@+id/btn_init_db" />
 
-    <EditText
-        android:id="@+id/etv_query_cause_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:hint="请输入查询ID" />
-
     <Button
         android:id="@+id/btn_query_all_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/module_sqlite_query_data"
+        app:layout_constraintTop_toBottomOf="@+id/btn_init_db" />
+
+    <Button
+        android:id="@+id/btn_delete_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/module_sqlite_delete_data"
+        app:layout_constraintLeft_toRightOf="@+id/btn_query_all_data"
         app:layout_constraintTop_toBottomOf="@+id/btn_init_db" />
 
     <TextView

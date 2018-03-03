@@ -143,6 +143,21 @@ class BaseDao<T : Any> : IBaseDao<T> {
     }
 
     /**
+     * 删除数据
+     */
+    override fun delete(where: T): Int {
+        val condition = Condition(getContentValuesForQuery(where))
+
+        //受影响行数
+        return sqLiteDatabase!!
+                .delete(
+                        tableName,
+                        condition.getWhereCause(),
+                        condition.getWhereArgs()
+                )
+    }
+
+    /**
      * 查询数据
      * @param where 查询条件对象,同时也用来初始化对象使用
      */

@@ -11,7 +11,13 @@ interface IBaseDao<T> {
     fun insert(entity: T): Long
 
     /**
+     * 根据条件 [where] 删除操作
+     */
+    fun delete(where: T): Int
+
+    /**
      * 根据条件 [where] 进行数据查询，如果[where]==null 则代表查询所有数据
      */
     fun query(where: T): MutableList<T>
+
 }

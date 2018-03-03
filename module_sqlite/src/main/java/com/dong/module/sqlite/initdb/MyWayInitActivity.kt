@@ -38,7 +38,7 @@ class MyWayInitActivity : BaseActivity() {
             if (userBaseDao != null) {
                 val userEntity = UserEntity()
                 userEntity.id = 1
-                userEntity.name = "測試數據"
+                userEntity.name = "测试插入数据"
                 userEntity.password = "lalala"
                 val result = userBaseDao!!.insert(userEntity)
                 if (result > 0) {
@@ -61,6 +61,22 @@ class MyWayInitActivity : BaseActivity() {
                     tv_show_result.text = result.toString()
                 } else {
                     tv_show_result.text = "没有查询到数据"
+                }
+            } else {
+                ToastUtils.showShortToast("请先连接数据库")
+            }
+        }
+
+        btn_delete_data.setOnClickListener {
+            if (userBaseDao != null) {
+                val where = UserEntity()
+                where.name = "董宏宇"
+
+                val result = userBaseDao!!.delete(where)
+                if (result > 0) {
+                    tv_show_result.text = "删除了 $result 条数据"
+                } else {
+                    tv_show_result.text = "没有找到要删除的数据"
                 }
             } else {
                 ToastUtils.showShortToast("请先连接数据库")
