@@ -13,5 +13,5 @@ interface IBaseDao<T> {
     /**
      * 查询所有数据
      */
-    fun queryAll(entity: Class<T>): MutableList<T>
+    fun queryAll(where: T): MutableList<T>
 }

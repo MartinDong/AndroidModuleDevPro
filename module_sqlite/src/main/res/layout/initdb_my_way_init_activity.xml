@@ -13,10 +13,24 @@
         android:text="@string/module_sqlite_init_db" />
 
     <Button
-        android:id="@+id/btn_init_insert"
+        android:id="@+id/btn_insert_test_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/module_sqlite_insert_test_data"
         app:layout_constraintLeft_toRightOf="@+id/btn_init_db" />
+
+
+    <Button
+        android:id="@+id/btn_query_all_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/module_sqlite_query_all_data"
+        app:layout_constraintTop_toBottomOf="@+id/btn_init_db" />
+
+    <TextView
+        android:id="@+id/tv_show_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/btn_query_all_data" />
 
 </android.support.constraint.ConstraintLayout>

@@ -15,4 +15,8 @@ class UserEntity {
     var name: String? = null
     @DbField("_password")
     var password: String? = null
+
+    override fun toString(): String {
+        return "UserEntity(id=$id, name=$name, password=$password)"
+    }
 }

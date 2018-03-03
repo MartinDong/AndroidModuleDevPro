@@ -34,17 +34,30 @@ class MyWayInitActivity : BaseActivity() {
             }
         }
 
-        btn_init_insert.setOnClickListener {
+        btn_insert_test_data.setOnClickListener {
             if (userBaseDao != null) {
                 val userEntity = UserEntity()
                 userEntity.id = 1
-                userEntity.name = "董宏宇"
-                userEntity.password = "donghongyu"
+                userEntity.name = "測試數據"
+                userEntity.password = "lalala"
                 val result = userBaseDao!!.insert(userEntity)
                 if (result > 0) {
                     ToastUtils.showShortToast("数据插入成功")
                 } else {
                     ToastUtils.showShortToast("数据插入失败")
+                }
+            } else {
+                ToastUtils.showShortToast("请先连接数据库")
+            }
+        }
+
+        btn_query_all_data.setOnClickListener {
+            if (userBaseDao != null) {
+                val result = userBaseDao!!.queryAll(UserEntity())
+                if (result.size > 0) {
+                    tv_show_result.text = result.toString()
+                } else {
+                    tv_show_result.text = "没有查询到数据"
                 }
             } else {
                 ToastUtils.showShortToast("请先连接数据库")

@@ -40,7 +40,7 @@ class BaseDaoFactory {
     }
 
     //获取数据库操作对象
-    fun <T> getBaseDao(entityClass: Class<T>): BaseDao<T>? {
+    fun <T : Any> getBaseDao(entityClass: Class<T>): BaseDao<T>? {
         var baseDao: BaseDao<T>? = null
 
         try {

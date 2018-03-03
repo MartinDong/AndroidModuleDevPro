@@ -12,7 +12,7 @@ import java.util.*
  * <p>数据类操作实现</p>
  * Created by Kotlin on 2018/3/1.
  */
-class BaseDao<T> : IBaseDao<T> {
+class BaseDao<T : Any> : IBaseDao<T> {
 
     //数据库操作的引用
     private var sqLiteDatabase: SQLiteDatabase? = null
@@ -91,35 +91,29 @@ class BaseDao<T> : IBaseDao<T> {
 
         fields.forEachIndexed { index, field ->
             //字段名称
-            val fieldName = field.getAnnotation(DbField::class.java).fieldName
+            val columnName = field.getAnnotation(DbField::class.java).fieldName
             //获取成员变量数据类型
             val fieldType = field.type
 
             when (fieldType) {
                 String::class.java -> {
-                    sqlCreateTable.append("$fieldName TEXT,")
+                    sqlCreateTable.append("$columnName TEXT,")
                 }
                 Int::class.java -> {
-                    sqlCreateTable.append("$fieldName INTEGER,")
+                    sqlCreateTable.append("$columnName INTEGER,")
                 }
                 Long::class.java -> {
-                    sqlCreateTable.append("$fieldName BIGINT,")
+                    sqlCreateTable.append("$columnName BIGINT,")
                 }
                 Double::class.java -> {
-                    sqlCreateTable.append("$fieldName DOUBLE,")
+                    sqlCreateTable.append("$columnName DOUBLE,")
                 }
-                Float::class.java -> {
-                    sqlCreateTable.append("$fieldName FLOAT,")
-                }
-                Boolean::class.java -> {
-                    sqlCreateTable.append("$fieldName BOOLEAN,")
-                }
-                Byte::class.java -> {
-                    sqlCreateTable.append("$fieldName BLOB,")
+                ByteArray::class.java -> {
+                    sqlCreateTable.append("$columnName BLOB,")
                 }
                 else -> {
                     //未知类型
-                    throw UnsupportedOperationException("未定义的数据类型：fieldName= $fieldName fieldType= $fieldType")
+                    throw UnsupportedOperationException("未定义的数据类型：fieldName= $columnName fieldType= $fieldType")
                 }
             }
 
@@ -147,24 +141,60 @@ class BaseDao<T> : IBaseDao<T> {
     /**
      * 查询所有数据
      */
-    override fun queryAll(entity: Class<T>): MutableList<T> {
+    override fun queryAll(where: T): MutableList<T> {
+        //定义查询结果
         val result = mutableListOf<T>()
         //1、查询语句
         val sqlQuery = "select * from $tableName"
         val cursor = sqLiteDatabase!!.rawQuery(sqlQuery, null)
         //Cursor从头读到尾
-        // 游标从头读到尾
+        //游标从头读到尾
         cursor.moveToFirst()
+        //移动游标获取下一行数据
         while (!cursor.isAfterLast) {
+            //通过反射构建一个查询结果对象
+            val item = where.javaClass.newInstance()
+
+            //拿到缓存的当前数据对象的成员变量与数据库的键值关系
             val fieldIterator = cacheField!!.entries.iterator()
             fieldIterator.forEach IteratorFor@{
-                //设置字段可访问
-                it.value.isAccessible = true
+                //获取数据库字段名称
+                val columnName = it.key
+                //数据库字段名对应的数据对象的成员变量
+                val field = it.value
+                field.isAccessible = true
+                //获取指定列名对应的索引
+                val columnIndex = cursor.getColumnIndex(columnName)
+                //获取成员变量数据类型
+                val fieldType = field.type
 
-                //取出数据库值，给成员变量赋值
-                it.value.set(entityClass, cursor.getColumnIndex(it.key))
-
+                if (columnIndex != -1) {
+                    when (fieldType) {
+                        String::class.java -> {
+                            field.set(item, cursor.getString(columnIndex))
+                        }
+                        Int::class.java -> {
+                            field.set(item, cursor.getInt(columnIndex))
+                        }
+                        Long::class.java -> {
+                            field.set(item, cursor.getLong(columnIndex))
+                        }
+                        Double::class.java -> {
+                            field.set(item, cursor.getDouble(columnIndex))
+                        }
+                        ByteArray::class.java -> {
+                            field.set(item, cursor.getBlob(columnIndex))
+                        }
+                        else -> {
+                            //未知类型
+                            throw UnsupportedOperationException("未定义的数据类型：columnName= $columnName fieldType= $fieldType")
+                        }
+                    }
+                }
             }
+            //添加到结果集
+            result.add(item)
+            //移动到下一个位置
             cursor.moveToNext()
         }
         cursor.close()
@@ -172,7 +202,7 @@ class BaseDao<T> : IBaseDao<T> {
     }
 
     /**
-     * 根据[getValues]获取ContentValues
+     * 获取ContentValues
      */
     private fun getContentValues(entity: T): ContentValues {
         val contentValues = ContentValues()
@@ -186,39 +216,29 @@ class BaseDao<T> : IBaseDao<T> {
                 //获取变量的值
                 val valueObject = it.value.get(entity) ?: return@IteratorFor
                 //获取列名
-                val key = it.key
+                val columnName = it.key
                 //获取成员变量数据类型
                 val fieldType = it.value.type
                 when (fieldType) {
                     String::class.java -> {
-                        contentValues.put(key, valueObject as String)
+                        contentValues.put(columnName, valueObject as String)
                     }
                     Int::class.java -> {
-                        contentValues.put(key, valueObject as Int)
+                        contentValues.put(columnName, valueObject as Int)
                     }
                     Long::class.java -> {
-                        contentValues.put(key, valueObject as Long)
+                        contentValues.put(columnName, valueObject as Long)
                     }
                     Double::class.java -> {
-                        contentValues.put(key, valueObject as Double)
-                    }
-                    Float::class.java -> {
-                        contentValues.put(key, valueObject as Float)
-                    }
-                    Boolean::class.java -> {
-                        contentValues.put(key, valueObject as Boolean)
+                        contentValues.put(columnName, valueObject as Double)
                     }
                     ByteArray::class.java -> {
-                        contentValues.put(key, valueObject as ByteArray)
+                        contentValues.put(columnName, valueObject as ByteArray)
                     }
                     else -> {
                         //未知类型
-                        throw UnsupportedOperationException("未定义的数据类型：fieldName= $key fieldType= $fieldType")
+                        throw UnsupportedOperationException("未定义的数据类型：columnName= $columnName fieldType= $fieldType")
                     }
-                }
-
-                if (key.isNotEmpty()) {
-
                 }
             } catch (e: IllegalArgumentException) {
                 e.printStackTrace()
