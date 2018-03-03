@@ -9,4 +9,9 @@ interface IBaseDao<T> {
      * 插入操作
      */
     fun insert(entity: T): Long
+
+    /**
+     * 查询所有数据
+     */
+    fun queryAll(entity: Class<T>): MutableList<T>
 }

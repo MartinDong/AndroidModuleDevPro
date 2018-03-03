@@ -1,18 +1,19 @@
 package com.dong.lib.common.sqlite
 
 import android.content.ContentValues
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.dong.lib.common.sqlite.annotation.DbField
 import com.dong.lib.common.sqlite.annotation.DbTable
 import java.lang.reflect.Field
 import java.util.*
 
+
 /**
  * <p>数据类操作实现</p>
  * Created by Kotlin on 2018/3/1.
  */
 class BaseDao<T> : IBaseDao<T> {
+
     //数据库操作的引用
     private var sqLiteDatabase: SQLiteDatabase? = null
     //要操作的数据实体的引用
@@ -60,7 +61,7 @@ class BaseDao<T> : IBaseDao<T> {
     private fun initCacheField() {
         //1.取到所有的列名（查询一个空表获取表结构，不影响性能）
         val sqlQuery = "select * from $tableName limit 1,0"
-        val cursor: Cursor = sqLiteDatabase!!.rawQuery(sqlQuery, null)
+        val cursor = sqLiteDatabase!!.rawQuery(sqlQuery, null)
         //获取所有的列名
         val columnNames = cursor.columnNames
         //关闭资源
@@ -75,7 +76,6 @@ class BaseDao<T> : IBaseDao<T> {
                 return@FieldFor
             }
         }
-
     }
 
     /**
@@ -138,32 +138,44 @@ class BaseDao<T> : IBaseDao<T> {
      */
     override fun insert(entity: T): Long {
         //1、准备好ContentValues中的数据
-        val map: Map<String, String> = getValues(entity)
         //2、设置插入的内容
-        val values: ContentValues = getContentValues(map)
+        val values: ContentValues = getContentValues(entity)
         //3、执行插入
         return sqLiteDatabase!!.insert(tableName, null, values)
     }
 
     /**
-     * 根据[getValues]获取ContentValues
+     * 查询所有数据
      */
-    private fun getContentValues(map: Map<String, String>): ContentValues {
-        val contentValues = ContentValues()
-        map.entries.iterator().forEach {
-            val key = it.key
-            val value = it.value
-            //设置数据表每一列对应的数据
-            contentValues.put(key, value)
+    override fun queryAll(entity: Class<T>): MutableList<T> {
+        val result = mutableListOf<T>()
+        //1、查询语句
+        val sqlQuery = "select * from $tableName"
+        val cursor = sqLiteDatabase!!.rawQuery(sqlQuery, null)
+        //Cursor从头读到尾
+        // 游标从头读到尾
+        cursor.moveToFirst()
+        while (!cursor.isAfterLast) {
+            val fieldIterator = cacheField!!.entries.iterator()
+            fieldIterator.forEach IteratorFor@{
+                //设置字段可访问
+                it.value.isAccessible = true
+
+                //取出数据库值，给成员变量赋值
+                it.value.set(entityClass, cursor.getColumnIndex(it.key))
+
+            }
+            cursor.moveToNext()
         }
-        return contentValues
+        cursor.close()
+        return result
     }
 
     /**
-     * 构建<数据表列名,数据对象成员变量值>集合
+     * 根据[getValues]获取ContentValues
      */
-    private fun getValues(entity: T): Map<String, String> {
-        val map = HashMap<String, String>()
+    private fun getContentValues(entity: T): ContentValues {
+        val contentValues = ContentValues()
 
         val fieldIterator = cacheField!!.entries.iterator()
 
@@ -173,21 +185,47 @@ class BaseDao<T> : IBaseDao<T> {
             try {
                 //获取变量的值
                 val valueObject = it.value.get(entity) ?: return@IteratorFor
-
-                //將获取的数据转成String类型
-                val value: String = valueObject.toString()
-
                 //获取列名
                 val key = it.key
+                //获取成员变量数据类型
+                val fieldType = it.value.type
+                when (fieldType) {
+                    String::class.java -> {
+                        contentValues.put(key, valueObject as String)
+                    }
+                    Int::class.java -> {
+                        contentValues.put(key, valueObject as Int)
+                    }
+                    Long::class.java -> {
+                        contentValues.put(key, valueObject as Long)
+                    }
+                    Double::class.java -> {
+                        contentValues.put(key, valueObject as Double)
+                    }
+                    Float::class.java -> {
+                        contentValues.put(key, valueObject as Float)
+                    }
+                    Boolean::class.java -> {
+                        contentValues.put(key, valueObject as Boolean)
+                    }
+                    ByteArray::class.java -> {
+                        contentValues.put(key, valueObject as ByteArray)
+                    }
+                    else -> {
+                        //未知类型
+                        throw UnsupportedOperationException("未定义的数据类型：fieldName= $key fieldType= $fieldType")
+                    }
+                }
 
                 if (key.isNotEmpty()) {
-                    map[key] = value
+
                 }
             } catch (e: IllegalArgumentException) {
                 e.printStackTrace()
             }
         }
 
-        return map
+        return contentValues
     }
+
 }
