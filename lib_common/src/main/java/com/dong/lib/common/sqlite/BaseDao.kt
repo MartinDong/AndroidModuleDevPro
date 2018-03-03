@@ -1,8 +1,12 @@
 package com.dong.lib.common.sqlite
 
+import android.content.ContentValues
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.dong.lib.common.sqlite.annotation.DbField
 import com.dong.lib.common.sqlite.annotation.DbTable
+import java.lang.reflect.Field
+import java.util.*
 
 /**
  * <p>数据类操作实现</p>
@@ -18,10 +22,13 @@ class BaseDao<T> : IBaseDao<T> {
     //记录数据表是否存在
     private var isInit = false
 
+    //因为反射会消耗时间，这里使用缓存，进行性能优化
+    //缓存空间（key-字段名,标注的自定义注解 value-成员变量）
+    private var cacheField: HashMap<String, Field>? = null
+
     fun init(sqLiteDatabase: SQLiteDatabase, entityClass: Class<T>): Boolean {
         this.sqLiteDatabase = sqLiteDatabase
         this.entityClass = entityClass
-        this.tableName = tableName
         //自动建表（只创建一次）
         if (!isInit) {
             //获取表名
@@ -35,10 +42,40 @@ class BaseDao<T> : IBaseDao<T> {
             //执行Sql进行自动建表
             val createTableSql = getCreateTableSql()
             sqLiteDatabase.execSQL(createTableSql)
+
+            //初始化缓存空间
+            cacheField = HashMap()
+            initCacheField()
+
+            //标记已经创建过数据表
             isInit = true
         }
 
         return isInit
+    }
+
+    /**
+     * 初始化字段缓存
+     */
+    private fun initCacheField() {
+        //1.取到所有的列名（查询一个空表获取表结构，不影响性能）
+        val sqlQuery = "select * from $tableName limit 1,0"
+        val cursor: Cursor = sqLiteDatabase!!.rawQuery(sqlQuery, null)
+        //获取所有的列名
+        val columnNames = cursor.columnNames
+        //关闭资源
+        cursor.close()
+        //2.取所有成员名
+        val columnFields = entityClass!!.declaredFields
+        //3.通过两层循环，进行对应关系建立
+        columnNames.forEach ColumnFor@{ columnName ->
+            columnFields.forEach FieldFor@{ columnField ->
+                if (columnName == columnField.getAnnotation(DbField::class.java).fieldName)
+                    cacheField!![columnName] = columnField
+                return@FieldFor
+            }
+        }
+
     }
 
     /**
@@ -96,8 +133,62 @@ class BaseDao<T> : IBaseDao<T> {
         return sqlCreateTable.toString()
     }
 
+    /**
+     * 插入数据
+     */
     override fun insert(entity: T): Long {
+        //1、准备好ContentValues中的数据
+        val map: Map<String, String> = getValues(entity)
+        //2、设置插入的内容
+        val values: ContentValues = getContentValues(map)
+        //3、执行插入
+        return sqLiteDatabase!!.insert(tableName, null, values)
+    }
 
-        return 0
+    /**
+     * 根据[getValues]获取ContentValues
+     */
+    private fun getContentValues(map: Map<String, String>): ContentValues {
+        val contentValues = ContentValues()
+        map.entries.iterator().forEach {
+            val key = it.key
+            val value = it.value
+            if (value != null) {
+                contentValues.put(key, value)
+            }
+        }
+        return contentValues
+    }
+
+    /**
+     * 构建<数据表列名,数据对象成员变量值>集合
+     */
+    private fun getValues(entity: T): Map<String, String> {
+        val map = HashMap<String, String>()
+
+        val fieldIterator = cacheField!!.entries.iterator()
+
+        fieldIterator.forEach IteratorFor@{
+            //设置字段可访问
+            it.value.isAccessible = true
+            try {
+                //获取变量的值
+                val valueObject = it.value.get(entity) ?: return@IteratorFor
+
+                //將获取的数据转成String类型
+                val value: String = valueObject.toString()
+
+                //获取列名
+                val key = it.key
+
+                if (key.isNotEmpty()) {
+                    map[key] = value
+                }
+            } catch (e: IllegalArgumentException) {
+                e.printStackTrace()
+            }
+        }
+
+        return map
     }
 }

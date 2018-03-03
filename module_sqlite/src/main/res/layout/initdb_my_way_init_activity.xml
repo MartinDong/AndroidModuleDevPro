@@ -12,4 +12,11 @@
         android:layout_height="wrap_content"
         android:text="@string/module_sqlite_init_db" />
 
+    <Button
+        android:id="@+id/btn_init_insert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/module_sqlite_insert_test_data"
+        app:layout_constraintLeft_toRightOf="@+id/btn_init_db" />
+
 </android.support.constraint.ConstraintLayout>

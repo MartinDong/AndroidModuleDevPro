@@ -9,4 +9,5 @@
     <string name="module_sqlite_toast_init_db_success">数据库连接成功</string>
     <string name="module_sqlite_toast_init_db_tab_success">创建数据表成功</string>
     <string name="module_sqlite_init_db_for_my">通过我的方式初始化数据库</string>
+    <string name="module_sqlite_insert_test_data">插入测试数据</string>
 </resources>
