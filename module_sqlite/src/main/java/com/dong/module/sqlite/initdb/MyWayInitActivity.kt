@@ -5,6 +5,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.dong.lib.common.base.BaseActivity
 import com.dong.lib.common.sqlite.BaseDao
 import com.dong.lib.common.sqlite.BaseDaoFactory
+import com.dong.lib.common.sqlite.IBaseDao
 import com.dong.lib.common.sqlite.proxy.BaseDaoProxy
 import com.dong.lib.common.utils.ToastUtils
 import com.dong.module.sqlite.R
@@ -23,7 +24,7 @@ class MyWayInitActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.initdb_my_way_init_activity)
         //User数据表操作引用
-        var userBaseDao: BaseDaoProxy<UserEntity>? = null
+        var userBaseDao: IBaseDao<UserEntity>? = null
 
         btn_init_db.setOnClickListener {
             //建立数据库连接，并创建数据表User
