@@ -2,7 +2,8 @@ package com.dong.lib.common.sqlite
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import com.dong.lib.common.sqlite.proxy.BaseDaoProxyForJava
+import com.dong.lib.common.sqlite.proxy.BaseDaoProxyLog
+import com.dong.lib.common.sqlite.proxy.BaseDaoProxyShow
 import com.dong.lib.common.utils.Utils
 
 /**
@@ -45,7 +46,7 @@ class BaseDaoFactory {
         var baseDao: IBaseDao<T>? = null
 
         try {
-            baseDao = BaseDaoProxyForJava().bind(BaseDao<T>()) as IBaseDao<T>
+            baseDao = BaseDaoProxyShow().bind(BaseDaoProxyLog().bind(BaseDao<T>())) as IBaseDao<T>
 
             baseDao.init(sqLiteDatabase!!, entityClass)
         } catch (e: Exception) {

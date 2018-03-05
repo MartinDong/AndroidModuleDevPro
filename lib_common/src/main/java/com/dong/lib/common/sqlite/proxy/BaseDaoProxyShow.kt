@@ -6,12 +6,11 @@ import java.lang.reflect.Method
 import java.lang.reflect.Proxy
 
 /**
- *
- * 使用java实现动态代理数据库操作类加入日志功能
+ * 使用java实现动态代理数据库操作类,加入更多额外的功能，来测试代理类的叠加功能
  * Created by xiaoyulaoshi on 2018/3/5.
  */
 
-class BaseDaoProxyForJava : InvocationHandler {
+class BaseDaoProxyShow : InvocationHandler {
 
     private var target: Any? = null
 
@@ -39,11 +38,11 @@ class BaseDaoProxyForJava : InvocationHandler {
     override fun invoke(proxy: Any, method: Method, args: Array<Any>): Any? {
         var result: Any? = null
         //反射方法前调用
-        Logger.i("当前执行>>${method.name}")
+        Logger.d("显示执行>>${method.name}")
         //反射执行方法  相当于调用target.sayHelllo;
         result = method.invoke(target, *args)
         //反射方法后调用.
-        Logger.i("执行结果>>$result")
+        Logger.d("执行结果>>$result")
         return result
     }
 }
