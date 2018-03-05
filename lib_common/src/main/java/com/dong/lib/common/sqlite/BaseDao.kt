@@ -29,7 +29,7 @@ class BaseDao<T : Any> : IBaseDao<T> {
     //缓存空间（key-字段名,标注的自定义注解 value-成员变量）
     private var cacheField: HashMap<String, Field>? = null
 
-    fun init(sqLiteDatabase: SQLiteDatabase, entityClass: Class<T>): Boolean {
+    override fun init(sqLiteDatabase: SQLiteDatabase, entityClass: Class<T>): Boolean {
         this.sqLiteDatabase = sqLiteDatabase
         this.entityClass = entityClass
         //自动建表（只创建一次）

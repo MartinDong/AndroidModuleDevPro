@@ -1,10 +1,9 @@
 package com.dong.lib.common.base
 
 import android.app.Application
+import com.dong.lib.common.utils.MyAndroidLogAdapter
 import com.dong.lib.common.utils.Utils
-import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
-import com.orhanobut.logger.PrettyFormatStrategy
 
 /**
  * 要想使用BaseApplication，必须在组件中实现自己的Application，并且继承BaseApplication；
@@ -37,11 +36,8 @@ open class BaseApplication : Application() {
         sInstance = this
         Utils.init(this)
 
-        //日志工具类
-        val formatStrategy = PrettyFormatStrategy.newBuilder()
-                .tag("QYD_LOG").build()
-        //设置日志适配器
-        Logger.addLogAdapter(AndroidLogAdapter(formatStrategy))
+        //日志工具类，配置自定义的日志记录策略
+        Logger.addLogAdapter(MyAndroidLogAdapter())
     }
     // endregion
 }

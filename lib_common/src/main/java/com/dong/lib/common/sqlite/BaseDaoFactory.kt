@@ -2,6 +2,7 @@ package com.dong.lib.common.sqlite
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import com.dong.lib.common.sqlite.proxy.BaseDaoProxy
 import com.dong.lib.common.utils.Utils
 
 /**
@@ -40,12 +41,13 @@ class BaseDaoFactory {
     }
 
     //获取数据库操作对象
-    fun <T : Any> getBaseDao(entityClass: Class<T>): BaseDao<T>? {
-        var baseDao: BaseDao<T>? = null
+    fun <T : Any> getBaseDao(entityClass: Class<T>): BaseDaoProxy<T>? {
+        var baseDao: BaseDaoProxy<T>? = null
 
         try {
-            baseDao = BaseDao::class.java.newInstance() as BaseDao<T>?
-            baseDao!!.init(sqLiteDatabase!!, entityClass)
+            baseDao = BaseDaoProxy<T>(BaseDao<T>())
+
+            baseDao.init(sqLiteDatabase!!, entityClass)
         } catch (e: Exception) {
             e.printStackTrace()
         }

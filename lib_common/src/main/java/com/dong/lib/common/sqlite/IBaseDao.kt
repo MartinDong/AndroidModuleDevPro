@@ -1,10 +1,17 @@
 package com.dong.lib.common.sqlite
 
+import android.database.sqlite.SQLiteDatabase
+
 /**
  * <p>操作SQLite数据库的顶层接口</p>
  * Created by Kotlin on 2018/2/27.
  */
 interface IBaseDao<T> {
+    /**
+     * 初始化数据库连接
+     */
+    fun init(sqLiteDatabase: SQLiteDatabase, entityClass: Class<T>): Boolean
+
     /**
      * 将 [entity] 进行数据插入
      */

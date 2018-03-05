@@ -46,7 +46,7 @@ android {
     //构建类型设置
     buildTypes {
         release {
-            buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "boolean", "LOG_DEBUG", "false"
             zipAlignEnabled false
             shrinkResources false
             minifyEnabled false
