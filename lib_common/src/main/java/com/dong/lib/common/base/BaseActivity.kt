@@ -11,8 +11,11 @@ import android.support.v7.app.AppCompatActivity
 @Keep
 open class BaseActivity : AppCompatActivity() {
 
+    var mActivity: BaseActivity? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mActivity = this
         //将当前Activity进行自己管理
         ViewManager.getInstance().addActivity(this)
     }

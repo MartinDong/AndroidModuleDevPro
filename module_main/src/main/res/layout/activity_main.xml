@@ -19,4 +19,11 @@
         android:layout_height="wrap_content"
         android:text="SQLite" />
 
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_move"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:src="@mipmap/ic_launcher" />
 </LinearLayout>

@@ -45,6 +45,7 @@ dependencies {
     api dependcy.appcompat_v7
     api dependcy.constraint_layout
     api dependcy.logger
+    api dependcy.design
 
     api dependcy.arouter_api
 }
