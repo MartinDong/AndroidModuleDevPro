@@ -42,11 +42,41 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api dependcy.kotlin_stdlib_jdk7
+
     api dependcy.appcompat_v7
+    api dependcy.design
+    api dependcy.cardview
+    api dependcy.customtabs
+    api dependcy.recyclerview
     api dependcy.constraint_layout
     api dependcy.logger
-    api dependcy.design
 
     api dependcy.arouter_api
+
+    api dependcy.rxjava
+    api dependcy.rxandroid2
+
+    api dependcy.okhttp3
+    api dependcy.okhttp3_logging
+    api dependcy.okio
+
+    api dependcy.retrofit2
+    api dependcy.retrofit2_adapter_rxjava2
+    api dependcy.retrofit2_converter_protobuf
+
+    api dependcy.gson
+
+    api dependcy.glide
+
+    api dependcy.recycle_adapter
+
+    api dependcy.amap_3dmap
+    api dependcy.amap_search
+    api dependcy.amap_location
+
+    api dependcy.eventbus
+
+    api dependcy.dagger2
+    kapt dependcy.dagger2_compiler
 }
 
