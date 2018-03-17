@@ -15,6 +15,8 @@ class ViewManager {
     //Activity栈
     private var activityStack: Stack<Activity>? = null
 
+    private var fragmentList: MutableList<BaseFragment>? = null
+
     private fun ViewManager() {}
 
     companion object {
@@ -27,10 +29,26 @@ class ViewManager {
         }
     }
 
-    fun addFragment(index:Int,fragment:BaseFragment){
-
+    fun addFragment(index: Int, fragment: BaseFragment) {
+        if (fragmentList == null) {
+            fragmentList = ArrayList()
+        }
+        fragmentList!!.add(index, fragment)
     }
 
+
+    fun getFragment(index: Int): BaseFragment? {
+        return if (fragmentList != null) {
+            fragmentList!![index]
+        } else null
+    }
+
+
+    fun getAllFragment(): MutableList<BaseFragment>? {
+        return if (fragmentList != null) {
+            fragmentList
+        } else null
+    }
 
     /**
      * 將指定的Activity添加到堆栈

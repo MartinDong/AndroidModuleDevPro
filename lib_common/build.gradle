@@ -41,13 +41,15 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api dependcy.kotlin_stdlib_jdk7
+    api dependcy.kotlin_stdlib_jdk8
 
+    api dependcy.support_v4
     api dependcy.appcompat_v7
     api dependcy.design
     api dependcy.cardview
     api dependcy.customtabs
     api dependcy.recyclerview
+    api dependcy.percent
     api dependcy.constraint_layout
     api dependcy.logger
 
@@ -62,7 +64,10 @@ dependencies {
 
     api dependcy.retrofit2
     api dependcy.retrofit2_adapter_rxjava2
-    api dependcy.retrofit2_converter_protobuf
+    api(dependcy.retrofit2_converter_protobuf) {
+        // Otherwise Android compile will complain "Multiple dex files define ..."
+        exclude module: "protobuf-java"
+    }
 
     api dependcy.gson
 
@@ -77,6 +82,5 @@ dependencies {
     api dependcy.eventbus
 
     api dependcy.dagger2
-    kapt dependcy.dagger2_compiler
 }
 

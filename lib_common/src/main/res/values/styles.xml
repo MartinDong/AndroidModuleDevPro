@@ -5,7 +5,11 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">#558AFF</item>
+    </style>
+
+    <style name="QYD_TabTextSize">
+        <item name="android:textSize">16dp</item>
     </style>
 
 </resources>

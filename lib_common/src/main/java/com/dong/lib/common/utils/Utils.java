@@ -53,4 +53,19 @@ public class Utils {
             return false;
         }
     }
+
+
+    /**
+     * 检查对象是否为空
+     *
+     * @param obj 要检查的对象
+     * @param <T>
+     * @return 不为Null返回原始对象，为空抛出异常信息
+     */
+    public static <T> T checkNotNull(T obj) {
+        if (obj == null) {
+            throw new NullPointerException();
+        }
+        return obj;
+    }
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--处理圆角的图片属性-->
+    <declare-styleable name="RoundImageView">
+        <!--可以直接绘制原型或者四个角是圆角-->
+        <attr name="type" format="enum">
+            <enum name="circle" value="1" />
+            <enum name="round" value="2" />
+        </attr>
+        <!--指定圆角的弧度-->
+        <attr name="radius" format="dimension" />
+    </declare-styleable>
+</resources>
