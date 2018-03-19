@@ -42,6 +42,8 @@ ext {
             amap_location               : '3.6.1',
             //Eventbus Android端优化的publish/subscribe消息总线, https://github.com/greenrobot/EventBus
             eventbus                    : '3.1.1',
+            //AOP AspectJ
+            aspectJ                     : '1.8.9',
 
     ]
     dependencies = [
@@ -92,5 +94,6 @@ ext {
             amap_location               : "com.amap.api:location:$versions.amap_location",
             //Eventbus Android端优化的publish/subscribe消息总线, https://github.com/greenrobot/EventBus
             eventbus                    : "org.greenrobot:eventbus:$versions.eventbus",
+            aspectJ                     : "org.aspectj:aspectjrt:$versions.aspectJ",
     ]
 }

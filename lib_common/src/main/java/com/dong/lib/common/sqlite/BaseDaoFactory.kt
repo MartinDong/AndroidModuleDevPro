@@ -10,7 +10,7 @@ import com.dong.lib.common.utils.Utils
  * <p>数据库处理工厂</p>
  * Created by Kotlin on 2018/3/1.
  */
-class BaseDaoFactory {
+open class BaseDaoFactory {
 
     //默认数据库名称
     private var dbName = "myApp.db"

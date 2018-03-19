@@ -14,7 +14,7 @@ import java.util.*
  * Created by Kotlin on 2018/3/1.
  */
 //T必须指明上界是Any且不为null，下面会用到反射获取对象实例，默认是Any?
-class BaseDao<T : Any> : IBaseDao<T> {
+open class BaseDao<T : Any> : IBaseDao<T> {
 
     //数据库操作的引用
     private var sqLiteDatabase: SQLiteDatabase? = null
