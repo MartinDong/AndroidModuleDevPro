@@ -16,6 +16,12 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:3.0.1"
         classpath dependcy.kotlin_gradle_plugin
+
+        //AOP aspectjx
+        classpath dependcy.aspectjx
+        classpath dependcy.aspectjtools
+        //AOP aspectjx
+
     }
 }
 

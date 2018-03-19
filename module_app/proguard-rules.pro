@@ -346,3 +346,6 @@ public void xxxxxx(**);
 
 # 如果使用了 单类注入，即不定义接口实现 IProvider，需添加下面规则，保护实现
 -keep class * implements com.alibaba.android.arouter.facade.template.IProvider
+
+#如果你在AOP代码里对A#funcA(String)进行hook, 那么在混淆配置文件里加上这样的配置 TODO 或者使用keep注解
+-keep class com.hujiang.test.A {*;}

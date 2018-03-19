@@ -82,7 +82,7 @@ dependencies {
     api dependcy.eventbus
 
     api dependcy.dagger2
-    
-    api dependcy.aspectJ
+
+    api dependcy.aspectjrt
 }
 
