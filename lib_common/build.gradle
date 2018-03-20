@@ -17,6 +17,9 @@ android {
         targetSdkVersion versions.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
+        //增加对Vector兼容性的支持 SVG
+        vectorDrawables.useSupportLibrary = true
     }
 
     compileOptions {
@@ -41,6 +44,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     api dependcy.kotlin_stdlib_jdk8
 
     api dependcy.support_v4

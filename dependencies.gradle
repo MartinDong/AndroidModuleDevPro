@@ -88,7 +88,7 @@ ext {
             //Gson https://github.com/google/gson
             gson                        : "com.google.code.gson:gson:$versions.gson",
             //对Recycle中Adapter的进行的抽离 https://github.com/CymChad/BaseRecyclerViewAdapterHelper/releases
-            recycle_adapter             : "com.google.code.gson:gson:$versions.gson",
+            recycle_adapter             : "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.recycle_adapter",
             //Map 高德地图SDK,http://lbs.amap.com/api/android-sdk/guide/create-project/android-studio-create-project#gradle_sdk
             amap_3dmap                  : "com.amap.api:3dmap:$versions.amap_3dmap",
             amap_search                 : "com.amap.api:search:$versions.amap_search",

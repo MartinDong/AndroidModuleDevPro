@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.annotation.IdRes
 import android.support.annotation.Keep
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.app.AppCompatDelegate
 import com.dong.lib.common.utils.Utils
 
 /**
@@ -12,6 +13,13 @@ import com.dong.lib.common.utils.Utils
  */
 @Keep
 open class BaseActivity : AppCompatActivity() {
+
+    companion object {
+        init {
+            // SVG 兼容设置
+            AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+        }
+    }
 
     var mActivity: BaseActivity? = null
 
