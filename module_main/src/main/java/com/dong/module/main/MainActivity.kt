@@ -9,21 +9,28 @@ import com.dong.lib.common.animator.path.AnimatorPath
 import com.dong.lib.common.animator.path.PathEvaluator
 import com.dong.lib.common.animator.path.PathPoint
 import com.dong.lib.common.base.BaseActivity
-import com.dong.lib.common.base.ViewManager
+import com.dong.lib.common.di.component.AppComponent
+import com.dong.lib.common.mvp.IPresenter
 import com.dong.lib.common.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  *  Created by Kotlin on 2018/2/26.
  */
-class MainActivity : BaseActivity() {
+class MainActivity<P : IPresenter> : BaseActivity<P>() {
 
     //记录按返回键时间
     private var mExitTime: Long = 0
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun setupActivityComponent(appComponent: AppComponent) {
+
+    }
+
+    override fun initView(savedInstanceState: Bundle?): Int {
+        return R.layout.activity_main
+    }
+
+    override fun initData(savedInstanceState: Bundle?) {
 
         btn_news.setOnClickListener {
             //跳转到新闻主页
@@ -45,7 +52,7 @@ class MainActivity : BaseActivity() {
             //执行属性动画
             val anim = ObjectAnimator.ofObject(
                     //属性动画作用域
-                    mActivity,
+                    this,
                     //要反射执行的方法名称
                     "fabMove",
                     //估值器，产生连续的点，根据下面的关键点自动生成
@@ -73,7 +80,7 @@ class MainActivity : BaseActivity() {
                 ToastUtils.showShortToast(getString(R.string.app_exit_hint))
                 mExitTime = System.currentTimeMillis()
             } else {
-                ViewManager.getInstance().exitApp(this)
+                finish()
             }
             return true
         }

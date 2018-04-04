@@ -3,10 +3,10 @@ package com.dong.module.sqlite.initdb
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.dong.lib.common.base.BaseActivity
-import com.dong.lib.common.sqlite.BaseDao
+import com.dong.lib.common.di.component.AppComponent
+import com.dong.lib.common.mvp.IPresenter
 import com.dong.lib.common.sqlite.BaseDaoFactory
 import com.dong.lib.common.sqlite.IBaseDao
-import com.dong.lib.common.sqlite.proxy.BaseDaoProxy
 import com.dong.lib.common.utils.ToastUtils
 import com.dong.module.sqlite.R
 import com.dong.module.sqlite.bean.UserEntity
@@ -17,12 +17,16 @@ import kotlinx.android.synthetic.main.initdb_my_way_init_activity.*
  *  Created by Kotlin on 2018/2/26.
  */
 @Route(path = "/sqlite/initdb/my_way_init")
-class MyWayInitActivity : BaseActivity() {
-    private val TAG = MyWayInitActivity::class.java.simpleName
+class MyWayInitActivity<P : IPresenter> : BaseActivity<P>() {
+    override fun setupActivityComponent(appComponent: AppComponent) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.initdb_my_way_init_activity)
+    }
+
+    override fun initView(savedInstanceState: Bundle?): Int {
+        return R.layout.initdb_my_way_init_activity
+    }
+
+    override fun initData(savedInstanceState: Bundle?) {
         //User数据表操作引用
         var userBaseDao: IBaseDao<UserEntity>? = null
 

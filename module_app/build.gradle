@@ -4,8 +4,6 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
-apply plugin: 'android-aspectjx'
-
 //获取项目的扩展属性
 def ext = rootProject.ext
 //ext为上方属性
@@ -71,7 +69,8 @@ android {
             ]
             // 自定义BuildConfig字段
             // 不显示Log
-            buildConfigField "boolean", "LEO_DEBUG", "false"
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "boolean", "USE_CANARY", "false"
             // 是否zip对齐
             zipAlignEnabled true
             // 缩减resource文件
@@ -84,13 +83,14 @@ android {
         }
 
         debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "boolean", "USE_CANARY", "true"
             // 给applicationId添加后缀“.debug”，这样手机就可以支持安装多个当前app
             applicationIdSuffix ".debug"
             manifestPlaceholders = [
                     app_icon : "@mipmap/ic_launcher_round",
                     app_label: "@string/app_name_debug"
             ]
-            buildConfigField "boolean", "LOG_DEBUG", "true"
             zipAlignEnabled false
             shrinkResources false
             minifyEnabled false
@@ -111,9 +111,9 @@ android {
                 //每个包内方法数上限
                 '--set-max-idx-number=60000',
                 //打包进主classes.dex的文件列表
-                '--main-dex-list=' + projectDir + '/maindexlist.txt',
+//                '--main-dex-list=' + projectDir + '/maindexlist.txt',
                 //使上一句生效
-                '--minimal-main-dex'
+//                '--minimal-main-dex'
         ]
     }
 
@@ -132,22 +132,6 @@ android {
         //解決rxjava冲突
         exclude 'META-INF/rxjava.properties'
     }
-}
-
-//aspectjx
-aspectjx {
-    //指定只对含有关键字'universal-image-loader', 'AspectJX-Demo/library'的库进行织入扫描，忽略其他库，提升编译效率
-//    includeJarFilter 'universal-image-loader', 'AspectJX-Demo/library'
-    //忽略所有依赖的库
-//    excludeJarFilter '.jar'
-    //排除包含‘universal-image-loader’的库
-//    excludeJarFilter 'universal-image-loader'
-    //忽略groupId为org.apache.httpcomponents的库
-//    excludeJarFilter 'org.apache.httpcomponents'
-    //忽略artifactId为gson的库
-//    excludeJarFilter 'gson'
-    //忽略jar alisdk-tlog-1.jar
-//    excludeJarFilter 'alisdk-tlog-1'
 }
 
 //依赖设置

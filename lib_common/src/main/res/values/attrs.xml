@@ -10,4 +10,65 @@
         <!--指定圆角的弧度-->
         <attr name="radius" format="dimension" />
     </declare-styleable>
+
+    <!--########################## 自定义控件 获取验证码，倒计时按钮 ##########################-->
+    <declare-styleable name="CountDownTextView">
+        <!--点击按钮之前的文案-->
+        <attr name="textBefore" format="string" />
+        <!--点击按钮之后正在倒计时的时候的文案-->
+        <attr name="textCenter" format="string" />
+        <!--点击按钮之后结束倒计时的文案-->
+        <attr name="textLater" format="string" />
+        <!--设置倒计时时常-->
+        <attr name="countDownTime" format="integer" />
+    </declare-styleable>
+    <!--########################## 自定义控件 获取验证码，倒计时按钮 ##########################-->
+
+    <!--########################## 自定义控件 价格日历 ##########################-->
+    <!-- 日历 -->
+    <declare-styleable name="DayPickerView">
+        <attr name="colorCurrentDay" format="reference|color" />                <!-- 今天字体颜色 -->
+        <attr name="colorSelectedDayBackground" format="reference|color" />     <!-- 被选中的日期背景颜色 -->
+        <attr name="colorSelectedDayRangeBackground" format="reference|color" /><!-- 被选中的日期背景颜色 -->
+        <attr name="colorSelectedDayText" format="reference|color" />           <!-- 被选中的日期字体颜色 -->
+        <attr name="colorPreviousDayText" format="reference|color" />           <!-- 已过去的日期字体颜色 -->
+        <attr name="colorNormalDayText" format="reference|color" />             <!-- 正常日期颜色 -->
+        <attr name="colorNormalTagText" format="reference|color" />             <!-- 正常Tag颜色 -->
+        <attr name="colorYearMonthText" format="reference|color" />             <!-- 头部年份月份字体颜色 -->
+        <attr name="colorWeekText" format="reference|color" />                  <!-- 头部星期几字体颜色 -->
+        <attr name="colorBusyDaysBg" format="reference|color" />                <!-- 被占用的日期背景颜色 -->
+        <attr name="colorInValidDaysBg" format="reference|color" />             <!-- 禁用的日期背景颜色 -->
+        <attr name="colorBusyDaysText" format="reference|color" />              <!-- 被占用的日期字体颜色 -->
+        <attr name="colorBusyTagText" format="reference|color" />               <!-- 被占用的日期字体颜色 -->
+        <attr name="colorInValidDaysText" format="reference|color" />           <!-- 禁用的日期字体颜色 -->
+
+        <attr name="bgStartDay" format="reference" />                           <!-- 选中开始时间的背景色 -->
+        <attr name="bgEndDay" format="reference" />                             <!-- 选中结束时间的背景色 -->
+        <attr name="bgStartAndEndDay" format="reference" />                     <!-- 选中开始结束时间相同的背景色 -->
+
+        <attr name="textSelectStartDay" format="reference|string" />            <!-- 选中开始时间的下面的文字 -->
+        <attr name="textSelectEndDay" format="reference|string" />              <!-- 选中结束时间的下面的文字 -->
+        <attr name="textSelectStartAndEndDay" format="reference|string" />              <!-- 选中结束时间的下面的文字 -->
+
+        <attr name="textBusyTag" format="reference|string" />                   <!-- 不可预定的日期下面的标签 -->
+        <attr name="textInvalidTag" format="reference|string" />                <!-- 禁用的日期下面的标签 -->
+
+        <attr name="textSizeDay" format="dimension" />                          <!-- 正常日期字体大小 -->
+        <attr name="textSizeTag" format="dimension" />                          <!-- 标签字体大小 -->
+        <attr name="tagShow" format="boolean" />                                <!-- 是否显示标签 -->
+        <attr name="textSizeYearMonth" format="dimension" />                    <!-- 头部年份月份字体大小 -->
+        <attr name="textSizeWeek" format="dimension" />                         <!-- 头部星期几字体大小 -->
+        <attr name="headerMonthHeight" format="dimension" />                    <!-- 头部高度 -->
+        <attr name="selectedDayRadius" format="dimension" />                    <!-- 日期半径 -->
+        <attr name="selectedDayHeight" format="dimension" />                    <!-- 日期高度 -->
+        <attr name="selectedDayWidth" format="dimension" />                     <!-- 日期宽度 -->
+        <attr name="calendarHeight" format="dimension" />                       <!-- 行高 -->
+        <attr name="enablePreviousDay" format="boolean" />                      <!-- 已过去的日期是否能被操作 -->
+        <attr name="isPagerSnap" format="boolean" />                            <!-- 是否开启ViewPager的效果，一般这个跟 horizontal一起用-->
+        <attr name="orientation">                                               <!-- 列表的滚动方向，horizontal-横向，vertical-纵向 -->
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+    </declare-styleable>
+    <!--########################## 自定义控件 价格日历 ##########################-->
 </resources>

@@ -236,5 +236,13 @@
     <dimen name="size_240dp">240.0dip</dimen>
     <dimen name="size_260dp">260.0dip</dimen>
 
-
+    <!--########################## 自定义控件 价格日历 ##########################-->
+    <dimen name="text_size_day">14sp</dimen>
+    <dimen name="text_size_tag">10sp</dimen>
+    <dimen name="text_size_month">16sp</dimen>
+    <dimen name="text_size_day_name">10sp</dimen>
+    <dimen name="header_month_height">50dip</dimen>
+    <dimen name="selected_day_radius">16dip</dimen>
+    <dimen name="calendar_height">270dip</dimen>
+    <!--########################## 自定义控件 价格日历 ##########################-->
 </resources>

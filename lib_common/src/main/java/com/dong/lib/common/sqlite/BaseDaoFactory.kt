@@ -17,7 +17,7 @@ open class BaseDaoFactory {
 
     init {
         //openOrCreateDatabase 如果不存在则先创建再打开数据库，如果存在则直接打开。
-        sqLiteDatabasePath = "${Utils.getContext().getDir("database", Context.MODE_APPEND).path}/$dbName"
+        sqLiteDatabasePath = "${Utils.getApp().getDir("database", Context.MODE_APPEND).path}/$dbName"
         sqLiteDatabase = SQLiteDatabase.openOrCreateDatabase(sqLiteDatabasePath, null)
     }
 

@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.dong.lib.common.base.BaseActivity
+import com.dong.lib.common.di.component.AppComponent
+import com.dong.lib.common.mvp.IPresenter
 import com.dong.lib.common.utils.ToastUtils
 import com.dong.module.sqlite.R
 import kotlinx.android.synthetic.main.initdb_old_way_init_activity.*
@@ -15,7 +17,8 @@ import kotlinx.android.synthetic.main.initdb_old_way_init_activity.*
  *  Created by Kotlin on 2018/2/26.
  */
 @Route(path = "/sqlite/initdb/old_way_init")
-class OldWayInitActivity : BaseActivity() {
+class OldWayInitActivity<P : IPresenter> : BaseActivity<P>() {
+
     private val TAG = OldWayInitActivity::class.java.simpleName
 
     //自己实现SQLiteOpenHelper
@@ -32,9 +35,15 @@ class OldWayInitActivity : BaseActivity() {
             + "author text, "
             + "price real)")
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.initdb_old_way_init_activity)
+    override fun setupActivityComponent(appComponent: AppComponent) {
+
+    }
+
+    override fun initView(savedInstanceState: Bundle?): Int {
+        return R.layout.initdb_old_way_init_activity
+    }
+
+    override fun initData(savedInstanceState: Bundle?) {
 
         //创建SQLIteOpenHelper对象（1）
         customerSQLiteOpenHelper = CustomerSQLiteOpenHelper(this)
@@ -65,4 +74,5 @@ class OldWayInitActivity : BaseActivity() {
             }
         }
     }
+
 }

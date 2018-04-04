@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 //获取项目的扩展属性
 def ext = rootProject.ext
@@ -30,6 +31,8 @@ android {
     buildTypes {
         release {
             buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "boolean", "USE_CANARY", "false"
+
             zipAlignEnabled false
             shrinkResources false
             minifyEnabled false
@@ -38,18 +41,30 @@ android {
         }
         debug {
             buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "boolean", "USE_CANARY", "true"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     api dependcy.kotlin_stdlib_jdk8
 
-    api dependcy.support_v4
-    api dependcy.appcompat_v7
-    api dependcy.design
+    api(dependcy.support_v4) {
+        exclude module: 'support-annotations'
+    }
+    api(dependcy.appcompat_v7) {
+        exclude module: 'support-annotations'
+        exclude module: 'support-v4'
+    }
+    api(dependcy.design) {
+        exclude module: 'support-annotations'
+        exclude module: 'appcompat-v7'
+        exclude module: 'support-v4'
+    }
+    api dependcy.annotations
     api dependcy.cardview
     api dependcy.customtabs
     api dependcy.recyclerview
@@ -60,14 +75,47 @@ dependencies {
     api dependcy.arouter_api
 
     api dependcy.rxjava
-    api dependcy.rxandroid2
+    api(dependcy.rxandroid2) {
+        exclude module: 'rxjava'
+    }
+    api(dependcy.rxcache2) {
+        exclude module: 'rxjava'
+        exclude module: 'dagger'
+    }
+    api(dependcy.rxcache_jolyglot_gson) {
+        exclude module: 'gson'
+    }
+    api(dependcy.rxlifecycle2) {
+        exclude module: 'rxjava'
+        exclude module: 'jsr305'
+    }
+    api(dependcy.rxlifecycle2_android) {
+        exclude module: 'support-annotations'
+        exclude module: 'rxjava'
+        exclude module: 'rxandroid'
+        exclude module: 'rxlifecycle'
+    }
+
+    api dependcy.rxerrorhandler2
+
+    api(dependcy.rxpermissions2) {
+        exclude module: 'rxjava'
+        exclude module: 'support-annotations'
+    }
 
     api dependcy.okhttp3
     api dependcy.okhttp3_logging
-    api dependcy.okio
 
-    api dependcy.retrofit2
-    api dependcy.retrofit2_adapter_rxjava2
+    api(dependcy.retrofit2) {
+        exclude module: 'okhttp'
+        exclude module: 'okio'
+    }
+    api(dependcy.retrofit2_adapter_rxjava2) {
+        exclude module: 'rxjava'
+        exclude module: 'okhttp'
+        exclude module: 'retrofit'
+        exclude module: 'okio'
+    }
     api(dependcy.retrofit2_converter_protobuf) {
         // Otherwise Android compile will complain "Multiple dex files define ..."
         exclude module: "protobuf-java"
@@ -75,17 +123,31 @@ dependencies {
 
     api dependcy.gson
 
-    api dependcy.glide
+    api(dependcy.glide) {
+        exclude module: 'support-v4'
+    }
+    kapt(dependcy.glide_compiler) {
+        exclude module: 'jsr305'
+    }
+    //对于加载自签名的https图片，我们需要通过GlideModule来进行网络请求库的定制
+    api dependcy.glide_loader_okhttp3
 
     api dependcy.recycle_adapter
+
+    api dependcy.progressmanager
+
+    debugApi dependcy.canary_debug
+    releaseApi dependcy.canary_release
+    testImplementation dependcy.canary_release
 
     api dependcy.amap_3dmap
     api dependcy.amap_search
     api dependcy.amap_location
 
-    api dependcy.eventbus
+    api dependcy.androideventbus
 
     api dependcy.dagger2
+    kapt dependcy.dagger2_compiler
 
     api dependcy.aspectjrt
 }

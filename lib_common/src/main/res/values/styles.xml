@@ -8,8 +8,57 @@
         <item name="colorAccent">#558AFF</item>
     </style>
 
-    <style name="QYD_TabTextSize">
-        <item name="android:textSize">16dp</item>
+    <!--PopupWindow弹出动画-->
+    <style name="AnimationPreview">
+        <item name="android:windowEnterAnimation">@anim/transitions_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/transitions_fade_out</item>
     </style>
 
+    <style name="AnimNull">
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@null</item>
+    </style>
+
+    <style name="AnimTop" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_top_in</item>
+        <item name="android:windowExitAnimation">@anim/push_top_out</item>
+    </style>
+
+    <style name="FullScreenDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <!--对话框样式-->
+    <style name="FadeDialog" parent="@style/Base.V7.Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="FadeDialog.Animation" parent="Animation.AppCompat.Dialog">
+        <item name="android:windowEnterAnimation">@anim/transitions_dialog_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/transitions_dialog_fade_out</item>
+    </style>
+
+    <style name="TransparentDialog" parent="@style/Base.V7.Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--是否模糊-->
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="BottomDialog" parent="@style/Base.V7.Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="BottomDialog.Animation" parent="Animation.AppCompat.Dialog">
+        <item name="android:windowEnterAnimation">@anim/transitions_dialog_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/transitions_dialog_bottom_out</item>
+    </style>
+    <!--对话框样式-->
 </resources>

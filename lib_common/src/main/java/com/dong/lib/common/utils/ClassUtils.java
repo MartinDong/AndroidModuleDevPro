@@ -1,11 +1,11 @@
 package com.dong.lib.common.utils;
 
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.annotation.Keep;
 import android.util.Log;
 
 import java.io.File;
@@ -24,8 +24,8 @@ import dalvik.system.DexFile;
  * Copy from galaxy sdk ${com.alibaba.android.galaxy.utils.ClassUtils}
  * Scanner, find out class with any conditions, copy from google source code.
  */
-@Keep
 public class ClassUtils {
+
     private static final String TAG = "ClassUtils";
 
     private static final String EXTRACTED_NAME_EXT = ".classes";

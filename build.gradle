@@ -14,14 +14,11 @@ buildscript {
         maven { url "http://maven.7u1.cn/repository/maven-public/" }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:3.0.1"
+        classpath 'com.android.tools.build:gradle:3.1.0'
         classpath dependcy.kotlin_gradle_plugin
 
-        //AOP aspectjx
-        classpath dependcy.aspectjx
-        classpath dependcy.aspectjtools
-        //AOP aspectjx
-
+        //ARouter 路由表插件
+        classpath dependcy.arouter_register
     }
 }
 

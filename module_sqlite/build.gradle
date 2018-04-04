@@ -60,12 +60,12 @@ android {
         main {
             if (isModule.toBoolean()) {
                 manifest.srcFile 'src/main/module/AndroidManifest.xml'
+                //组件模式下将组件使用的java目录导入进来
+                java.srcDirs 'src/main/module/java', 'src/main/java'
             } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
-                //集成开发模式下排除 debug 文件夹中的所有Java文件
-                java {
-                    exclude 'debug/**'
-                }
+                //集成开发模式只保留原有的java目录
+                java.srcDirs 'src/main/java'
             }
         }
     }

@@ -196,7 +196,7 @@ class ToastUtils {
          * @param duration 显示时长
          */
         private fun showToast(@StringRes resId: Int, duration: Int) {
-            showToastFinal(Utils.getContext().resources.getText(resId).toString(), duration)
+            showToastFinal(Utils.getApp().resources.getText(resId).toString(), duration)
         }
 
         /**
@@ -207,7 +207,7 @@ class ToastUtils {
          * @param args     参数
          */
         private fun showToast(@StringRes resId: Int, duration: Int, vararg args: Any) {
-            showToastFinal(String.format(Utils.getContext().resources.getString(resId), args), duration)
+            showToastFinal(String.format(Utils.getApp().resources.getString(resId), args), duration)
         }
 
         /**
@@ -230,7 +230,7 @@ class ToastUtils {
         private fun showToastFinal(text: CharSequence, duration: Int) {
             if (isJumpWhenMore) cancelToast()
             if (sToast == null) {
-                sToast = Toast.makeText(Utils.getContext(), text, duration)
+                sToast = Toast.makeText(Utils.getApp(), text, duration)
                 //取出Toast中的文本控件进行自定义
                 var tv = sToast!!.view.findViewById<TextView>(android.R.id.message)
                 tv.textSize = 12F
