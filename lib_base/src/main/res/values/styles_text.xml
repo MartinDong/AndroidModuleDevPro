@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--文字样式-->
+    <style name="BKText">
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <!--设置字体样式，粗体使用-->
+    <style name="BKText.Medium" parent="android:TextAppearance">
+        <!-- Custom Attr-->
+        <!--<item name="fontPath">fonts/PingFangSC-Medium_hei.ttf</item>-->
+    </style>
+
+    <style name="BKText.Medium.SingleLine">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="BKText.SingleLine">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+
+    <!-- 输入框的样式 -->
+    <style name="BKEditText">
+        <item name="android:background">@null</item>
+        <item name="android:textColor">#333333</item>
+        <item name="android:textColorHint">#b4b8bd</item>
+    </style>
+
+    <style name="BKEditText.SingleLine">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="BKEditText.CenterVertical" parent="BKEditText.SingleLine">
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="BKEditText.Number" parent="BKEditText.SingleLine">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:maxLength">6</item>
+    </style>
+
+    <style name="BKEditText.IntNumber" parent="BKEditText.Number">
+        <item name="android:inputType">number|numberSigned</item>
+        <item name="android:digits">1234567890</item>
+    </style>
+
+    <style name="BKEditText.DoubleNumber" parent="BKEditText.Number">
+        <item name="android:inputType">number|numberDecimal</item>
+        <item name="android:digits">1234567890.</item>
+    </style>
+
+    <style name="BKEditText.MoneyNumber" parent="BKEditText.DoubleNumber">
+        <item name="android:maxLength">6</item>
+    </style>
+
+</resources>

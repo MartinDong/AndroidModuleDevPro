@@ -28,6 +28,9 @@ android {
         versionCode 1
         versionName "1.0"
 
+        //dex多分包
+        multiDexEnabled true
+
         // java编译对annotation的配置
         javaCompileOptions {
             annotationProcessorOptions {
@@ -72,7 +75,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':lib_common')
+    implementation project(':lib_base')
 
     kapt dependcy.arouter_compiler
 }

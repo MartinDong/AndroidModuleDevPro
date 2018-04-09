@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="QydTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+    <!--去掉了头部的Toolbar的样式-->
+    <style name="QydTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!--多点触控，在无需多点触控的页面上，可以选择关闭-->
+        <item name="android:splitMotionEvents">false</item>
+
+        <!--设置全局的Activity转场动画-->
+        <!--<item name="android:windowAnimationStyle">@style/MyActTransitions</item>-->
+    </style>
+
+    <style name="MyActTransitions" parent="@android:style/Animation.Activity">
+        <!--A1 启动 A2 时，A2 出现在屏幕上-->
+        <item name="android:activityOpenEnterAnimation">@anim/anim_slide_in_from_right</item>
+        <!--A1 启动 A2 时，A1 从屏幕上消失-->
+        <item name="android:activityOpenExitAnimation">@anim/anim_slide_out_from_left</item>
+        <!-- A2 退出回到 A1 时，A1 出现在屏幕上-->
+        <item name="android:activityCloseEnterAnimation">@anim/anim_slide_in_from_left</item>
+        <!--A2 退出回到 A1 时，A2 从屏幕上消失-->
+        <item name="android:activityCloseExitAnimation">@anim/anim_slide_out_from_right</item>
+
+        <!--下面的操作时将系统的动画去掉，防止动画之间冲突-->
+        <item name="android:taskOpenEnterAnimation">@null</item>
+
+        <item name="android:taskOpenExitAnimation">@null</item>
+
+        <item name="android:taskCloseEnterAnimation">@null</item>
+
+        <item name="android:taskCloseExitAnimation">@null</item>
+
+        <item name="android:taskToFrontEnterAnimation">@null</item>
+
+        <item name="android:taskToFrontExitAnimation">@null</item>
+
+        <item name="android:taskToBackEnterAnimation">@null</item>
+
+        <item name="android:taskToBackExitAnimation">@null</item>
+    </style>
+</resources>

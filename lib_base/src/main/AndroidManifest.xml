@@ -1,0 +1,14 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.dong.lib.base">
+
+
+    <application>
+        <!-- arms配置 -->
+        <meta-data
+            android:name="com.dong.lib.base.app.GlobalConfiguration"
+            android:value="ConfigModule" />
+
+    </application>
+
+
+</manifest>

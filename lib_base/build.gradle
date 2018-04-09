@@ -1,24 +1,15 @@
-if (isModule.toBoolean()) {
-    apply plugin: 'com.android.application'
-} else {
-    apply plugin: 'com.android.library'
-}
+apply plugin: 'com.android.library'
+
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+
 
 //获取项目的扩展属性
 def ext = rootProject.ext
 //ext为上方属性
 def versions = ext.versions
 def dependcy = ext.dependencies
-
-kapt {
-    arguments {
-        // ARouter配置
-        arg("moduleName", project.getName())
-    }
-}
 
 android {
     compileSdkVersion versions.compileSdkVersion
@@ -29,15 +20,13 @@ android {
         versionCode 1
         versionName "1.0"
 
-        //dex多分包
-        multiDexEnabled true
+        //增加对Vector兼容性的支持 SVG
+        vectorDrawables.useSupportLibrary = true
 
-        // java编译对annotation的配置
-        javaCompileOptions {
-            annotationProcessorOptions {
-                // 是否包含编译Class的路径（供系统使用）
-                includeCompileClasspath = true
-            }
+
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi', 'x86'//, 'armeabi-v7a'//, 'x86_64'//, 'arm64-v8a'
         }
     }
 
@@ -46,14 +35,21 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    //构建类型设置
     buildTypes {
         release {
             buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "boolean", "USE_CANARY", "false"
+
             zipAlignEnabled false
             shrinkResources false
             minifyEnabled false
             debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "boolean", "USE_CANARY", "true"
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -61,14 +57,8 @@ android {
     //重新设置资源指向
     sourceSets {
         main {
-            if (isModule.toBoolean()) {
-                manifest.srcFile 'src/main/module/AndroidManifest.xml'
-                //组件模式下将组件使用的java目录导入进来
-                java.srcDirs 'src/main/module/java', 'src/main/java'
-            } else {
-                manifest.srcFile 'src/main/AndroidManifest.xml'
-                //集成开发模式只保留原有的java目录
-                java.srcDirs 'src/main/java'
+            java {
+                srcDirs += file("src/proto_java/main/javalite")
             }
         }
     }
@@ -76,7 +66,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':lib_base')
 
-    kapt dependcy.arouter_compiler
+    api dependcy.multidex
+    api project(':lib_common')
 }
+

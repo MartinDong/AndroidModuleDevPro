@@ -3,8 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidModuleDevPro.iml" filepath="$PROJECT_DIR$/AndroidModuleDevPro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib_base/lib_base.iml" filepath="$PROJECT_DIR$/lib_base/lib_base.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_common/lib_common.iml" filepath="$PROJECT_DIR$/lib_common/lib_common.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_app/module_app.iml" filepath="$PROJECT_DIR$/module_app/module_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module_knowledge/module_knowledge.iml" filepath="$PROJECT_DIR$/module_knowledge/module_knowledge.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_login/module_login.iml" filepath="$PROJECT_DIR$/module_login/module_login.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_main/module_main.iml" filepath="$PROJECT_DIR$/module_main/module_main.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_news/module_news.iml" filepath="$PROJECT_DIR$/module_news/module_news.iml" />

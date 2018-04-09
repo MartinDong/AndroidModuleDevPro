@@ -137,8 +137,7 @@ android {
 //依赖设置
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation dependcy.multidex
-    implementation project(':lib_common')
+    implementation project(':lib_base')
 
     if (!isModule.toBoolean()) {
         implementation project(':module_main')
