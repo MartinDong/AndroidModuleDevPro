@@ -24,9 +24,11 @@ class NewsActivity<P : IPresenter> : BaseActivity<P>() {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        btn_to_login.setOnClickListener {
+        btn_to_handler.setOnClickListener {
             //跳转登录页面
-            ARouter.getInstance().build("/login/login_page").navigation()
+            ARouter.getInstance()
+                    .build("/knowledge/handler")
+                    .navigation()
         }
     }
 }

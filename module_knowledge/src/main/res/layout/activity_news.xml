@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.dong.module.module_konwledge.main.NewsActivity">
+    tools:context="com.dong.module.knowledge.main.NewsActivity">
 
     <Button
-        android:id="@+id/btn_to_login"
+        android:id="@+id/btn_to_handler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="跳转登录页面" />
+        android:text="Handler案例" />
 
 </LinearLayout>
