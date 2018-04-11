@@ -12,4 +12,10 @@
         android:layout_height="wrap_content"
         android:text="Handler案例" />
 
+    <Button
+        android:id="@+id/btn_to_customer_handler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Customer Handler案例" />
+
 </LinearLayout>

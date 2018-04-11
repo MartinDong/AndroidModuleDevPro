@@ -30,5 +30,11 @@ class NewsActivity<P : IPresenter> : BaseActivity<P>() {
                     .build("/knowledge/handler")
                     .navigation()
         }
+        btn_to_customer_handler.setOnClickListener {
+            //跳转登录页面
+            ARouter.getInstance()
+                    .build("/knowledge/customer_handler")
+                    .navigation()
+        }
     }
 }

@@ -6,6 +6,11 @@
         <activity
             android:name=".main.NewsActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".handler.HandlerActivity"/>
+
+        <activity android:name=".handler.CustomerHandlerActivity"/>
+
     </application>
 
 </manifest>

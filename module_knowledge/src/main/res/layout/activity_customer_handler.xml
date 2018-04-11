@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".handler.HandlerActivity">
+
+    <Button
+        android:id="@+id/btn_start_count_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开始倒计时" />
+
+    <TextView
+        android:id="@+id/tv_count_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="还有60秒"
+        app:layout_constraintTop_toBottomOf="@+id/btn_start_count_down" />
+</android.support.constraint.ConstraintLayout>
