@@ -5,42 +5,41 @@ import android.os.Parcelable;
 
 /**
  * ================================================
- * 类说明
+ * 自定义消息载体
  * Created by KotlinD on 2018/4/10.
  * <p>
  * ================================================
  */
 public class Message implements Parcelable {
+    //用户定义的消息代码，以便收件人可以识别此消息的内容
     public int what;
+    //如果只是传递整形数据可以使用 arg1、arg2
     public int arg1;
     public int arg2;
+
+    //如果传递复杂数据可以使用这个
     public Object obj;
 
-    /*package*/ int flags;
+    //标记当前的Message要作用在那个Handler中
+    Handler target;
 
-    /*package*/ Handler target;
-
-    /*package*/ Runnable callback;
+    //当前的Message要执行的子线程
+    Runnable callback;
 
     // sometimes we store linked lists of these things
-    /*package*/ Message next;
+    Message next;
 
     private static final Object sPoolSync = new Object();
     private static Message sPool;
-    private static int sPoolSize = 0;
 
-    /*package*/ static final int FLAG_IN_USE = 1 << 0;
+    public Message() {
+    }
 
-    private static final int MAX_POOL_SIZE = 50;
-
-    /**
-     * If set message is asynchronous
-     */
-    /*package*/ static final int FLAG_ASYNCHRONOUS = 1 << 1;
 
     /**
-     * Return a new Message instance from the global pool. Allows us to
-     * avoid allocating new objects in many cases.
+     * 这里是性能优化，从线程池获取一个对象，避免重新创建对象，本案例中没有使用到这个特性
+     *
+     * @return Message
      */
     public static Message obtain() {
         synchronized (sPoolSync) {
@@ -48,45 +47,13 @@ public class Message implements Parcelable {
                 Message m = sPool;
                 sPool = m.next;
                 m.next = null;
-                m.flags = 0; // clear in-use flag
-                sPoolSize--;
                 return m;
             }
         }
         return new Message();
     }
 
-    /**
-     * Recycles a Message that may be in-use.
-     * Used internally by the MessageQueue and Looper when disposing of queued Messages.
-     */
-    void recycleUnchecked() {
-        // Mark the message as in use while it remains in the recycled object pool.
-        // Clear out all other details.
-        flags = FLAG_IN_USE;
-        what = 0;
-        arg1 = 0;
-        arg2 = 0;
-        obj = null;
-        target = null;
-        callback = null;
-
-        synchronized (sPoolSync) {
-            if (sPoolSize < MAX_POOL_SIZE) {
-                next = sPool;
-                sPool = this;
-                sPoolSize++;
-            }
-        }
-    }
-
-
-    /**
-     * Constructor (but the preferred way to get a Message is to call {@link #obtain() Message.obtain()}).
-     */
-    public Message() {
-    }
-
+    //////////////////////////////////////下面是实现Parcelable固定的写法与逻辑关系不大/////////////////////////////////////////////
     public static final Parcelable.Creator<Message> CREATOR
             = new Parcelable.Creator<Message>() {
         public Message createFromParcel(Parcel source) {
@@ -132,14 +99,6 @@ public class Message implements Parcelable {
         arg2 = source.readInt();
         if (source.readInt() != 0) {
             obj = source.readParcelable(getClass().getClassLoader());
-        }
-    }
-
-    public void setAsynchronous(boolean async) {
-        if (async) {
-            flags |= FLAG_ASYNCHRONOUS;
-        } else {
-            flags &= ~FLAG_ASYNCHRONOUS;
         }
     }
 }
